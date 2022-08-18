@@ -1,0 +1,10 @@
+.env
+.DS_Store
+test.ipynb
+builder.sh
+test.py
+build/
+modelfun.egg-info/
+dist/
+*.pyc
+__pycache__

@@ -1,10 +1,10 @@
 
 # Please go to [ClueAI](https://www.clueai.cn/) to try examples
-Eliminate the bottleneck of handmade marks and release AI potential.  
+Making NLP part of every developer's toolkit.  
 
-# Modelfun Python SDK
+# Clueai Python SDK
 
-This package provides functionality developed to simplify interfacing with the [MODELFUN API] in Python 3.
+This package provides functionality developed to simplify interfacing with the ClueAI API in Python 3.
 
 ## Installation
 
@@ -31,7 +31,7 @@ To use this library, you must have an API key and specify it as a string when cr
 ```python
 import clueai
 
-# initialize the Modelfun Client with an API Key
+# initialize the Clueai Client with an API Key
 cl = clueai.Client('YOUR_API_KEY')
 prompt= '''
 摘要：
@@ -50,7 +50,7 @@ print('prediction: {}'.format(prediction.generations[0].text))
 ```python
 import clueai
 from clueai.classify import Example
-# initialize the Modelfun Client with an API Key
+# initialize the Clueai Client with an API Key
 cl = clueai.Client('YOUR_API_KEY')
 response = cl.classify(model_name='clueai',
   task_name='情感分析',
@@ -64,24 +64,24 @@ print('prediction: {}'.format(
 
 
 ## Versioning
-To use the SDK with a specific API version, you can specify it when creating the Modelfun Client:
+To use the SDK with a specific API version, you can specify it when creating the Clueai Client:
 
 ```python
 import clueai
 
-mo = clueai.Client('YOUR_API_KEY', '2022-08-08')
+cl = clueai.Client('YOUR_API_KEY', '2022-08-08')
 ```
 
 ## Endpoints
 
-Modelfun Endpoint | Function
+Clueai Endpoint | Function
 ----- | -----
 /generate  | cl.generate()
 /classify | cl.classify()
 
 ## Models
-When you call Modelfun's APIs we decide on a good default model for your use-case behind the scenes. The default model is great to get you started, but in production environments we recommend that you specify the model size yourself via the `model` parameter.
+When you call Clueai's APIs we decide on a good default model for your use-case behind the scenes. The default model is great to get you started, but in production environments we recommend that you specify the model size yourself via the `model` parameter.
 
 ## Responses
-All of the endpoint functions will return a Modelfun object corresponding to the endpoint (e.g. for generation, it would be `Generation`). The responses can be found as instance variables of the object (e.g. generation would be `Generation.text`). Printing the Modelfun response object itself will display an organized view of the instance variables.
+All of the endpoint functions will return a Clueai object corresponding to the endpoint (e.g. for generation, it would be `Generation`). The responses can be found as instance variables of the object (e.g. generation would be `Generation.text`). Printing the Clueai response object itself will display an organized view of the instance variables.
 

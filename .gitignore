@@ -4,7 +4,7 @@ test.ipynb
 builder.sh
 test.py
 build/
-modelfun.egg-info/
+clueai.egg-info/
 dist/
 *.pyc
 __pycache__

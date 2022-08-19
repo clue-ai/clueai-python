@@ -57,7 +57,8 @@ cl = clueai.Client('YOUR_API_KEY')
 response = cl.classify(model_name='clueai',
   task_name='情感分析',
   inputs=["世界充满了欺骗", "世界和平"],
-  examples=[Example("基本都是欺骗", "消极"), Example("基本都是惊喜", "积极")],
+  examples=[Example("基本都是欺骗", "消极"),
+   Example("基本都是惊喜", "积极")],
   labels = ["消极", "积极"])
   
 print('prediction: {}'.format(

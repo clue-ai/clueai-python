@@ -13,7 +13,6 @@
 
 <p align=center>
 <a href=""> <img src="https://img.shields.io/badge/language-python3.6+-brightgreen.svg?style=plastic"></a>
-<a href="https://pypi.org/project/clueai/"><img src="https://img.shields.io/badge/pypi-0.0.0.1-brightgreen.svg?style=plastic"></a>
 <a href="https://pypi.org/project/clueai/"><img alt="PyPI" src="https://img.shields.io/pypi/v/clueai?label=PyPI&logo=pypi&logoColor=white&style=flat-square"></a>
 <a href="https://clueai.cn"><img src="https://www.modelfun.cn/assets/logo.57d43a51.png" width="30px"></a>
 </p>
@@ -37,10 +36,60 @@ python setup.py install
 ```
 ## Quick Start
 
+
+### Free try
+
+
+<table>
+<tr>
+<td> classify 🔐 </td>
+<td> generate 🔐⚡⚡ </td>
+</tr>
+<tr>
+<td>
+
+```python
+import clueai
+from clueai.classify import Example
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+response = cl.classify(model_name='clueai-base',
+  task_name='情感分析',
+  inputs=["世界充满了欺骗", "世界和平"],
+  examples=[Example("基本都是欺骗", "消极"),
+   Example("基本都是惊喜", "积极")],
+  labels = ["消极", "积极"])
+  
+print('prediction: {}'.format(
+       response.classifications))
+```
+</td>
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+prompt= '''
+摘要：
+本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
+答案：
+'''
+# generate a prediction for a prompt 
+prediction = cl.generate(
+            model_name='clueai-base',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+</tr>
+</table>
+
+### Bigger model and better model
 To use this library, you must have an API key and specify it as a string when creating the `clueai.Client` object. API keys can be created through the [platform](https://www.clueai.cn/). This is a basic example of the creating the client and using the `generate` endpoint.
-
-
-### Classify & Generate Tasks
 
 <table>
 <tr>
@@ -55,7 +104,7 @@ import clueai
 from clueai.classify import Example
 # initialize the Clueai Client with an API Key
 cl = clueai.Client('YOUR_API_KEY')
-response = cl.classify(model_name='clueai',
+response = cl.classify(model_name='clueai-large',
   task_name='情感分析',
   inputs=["世界充满了欺骗", "世界和平"],
   examples=[Example("基本都是欺骗", "消极"),
@@ -80,7 +129,7 @@ prompt= '''
 '''
 # generate a prediction for a prompt 
 prediction = cl.generate(
-            model_name='clueai',
+            model_name='clueai-large',
             prompt=prompt)
             
 # print the predicted text          
@@ -89,6 +138,7 @@ print('prediction: {}'.format(prediction.generations[0].text))
 </td>
 </tr>
 </table>
+
 
 
 ## Models

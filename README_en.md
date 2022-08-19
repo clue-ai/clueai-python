@@ -97,3 +97,4 @@ When you call Clueai's APIs we decide on a good default model for your use-case 
 ## Responses
 All of the endpoint functions will return a Clueai object corresponding to the endpoint (e.g. for generation, it would be `Generation`). The responses can be found as instance variables of the object (e.g. generation would be `Generation.text`). Printing the Clueai response object itself will display an organized view of the instance variables.
 
+ClueAI is backed by [Clue AI](https://clueai.cn) and [licensed](./LICENSE).

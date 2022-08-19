@@ -89,7 +89,7 @@ print('prediction: {}'.format(prediction.generations[0].text))
 </table>
 
 ### Bigger model and better model
-To use this library, you must have an API key and specify it as a string when creating the `clueai.Client` object. API keys can be created through the [platform](https://www.clueai.cn/). This is a basic example of the creating the client and using the `generate` endpoint.
+To use bigger model, you must have an API key and specify it as a string when creating the `clueai.Client` object. API keys can be created through the [platform](https://www.clueai.cn/). This is a basic example of the creating the client and using the `generate` endpoint.
 
 <table>
 <tr>

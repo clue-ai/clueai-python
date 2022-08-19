@@ -12,7 +12,9 @@
 
 
 <p align=center>
-<a href="https://clueai.cn"><img src="https://img.shields.io/badge/language-python3.6+-brightgreen.svg?style=plastic"></a>
+<a <img src="https://img.shields.io/badge/language-python3.6+-brightgreen.svg?style=plastic"></a>
+<a href="https://pypi.org/project/clueai/"><img src="https://img.shields.io/badge/pypi-0.0.0.1-brightgreen.svg?style=plastic"></a>
+<a href="https://clueai.cn"><img src="https://www.modelfun.cn/assets/logo.57d43a51.png" width="30px"></a>
 </p>
 
 # Clueai Python SDK
@@ -85,10 +87,6 @@ print('prediction: {}'.format(prediction.generations[0].text))
 </td>
 </tr>
 </table>
-
-# Please go to [ClueAI](https://www.clueai.cn/) to try examples
-
-
 
 
 ## Models

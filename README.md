@@ -18,6 +18,8 @@
 
 </p>
 
+*Read this in other languages: [English](README_en.md)
+
 # Python 软件包
 
 该软件包提供了开发的功能，以简化在python3中与clueai API的接口。

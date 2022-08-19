@@ -41,9 +41,8 @@ python setup.py install
 
 在用这个库之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例
 
+### 免费试玩
 
-
-### 分类和生成任务
 
 <table>
 <tr>
@@ -58,7 +57,7 @@ import clueai
 from clueai.classify import Example
 # initialize the Clueai Client with an API Key
 cl = clueai.Client('YOUR_API_KEY')
-response = cl.classify(model_name='clueai',
+response = cl.classify(model_name='clueai-base',
   task_name='情感分析',
   inputs=["世界充满了欺骗", "世界和平"],
   examples=[Example("基本都是欺骗", "消极"),
@@ -83,7 +82,57 @@ prompt= '''
 '''
 # generate a prediction for a prompt 
 prediction = cl.generate(
-            model_name='clueai',
+            model_name='clueai-base',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+</tr>
+</table>
+
+### 分类和生成任务
+
+<table>
+<tr>
+<td> 分类任务 🔐 </td>
+<td> 生成任务 🔐⚡⚡ </td>
+</tr>
+<tr>
+<td>
+
+```python
+import clueai
+from clueai.classify import Example
+# initialize the Clueai Client with an API Key
+cl = clueai.Client('YOUR_API_KEY')
+response = cl.classify(model_name='clueai-large',
+  task_name='情感分析',
+  inputs=["世界充满了欺骗", "世界和平"],
+  examples=[Example("基本都是欺骗", "消极"),
+   Example("基本都是惊喜", "积极")],
+  labels = ["消极", "积极"])
+  
+print('prediction: {}'.format(
+       response.classifications))
+```
+</td>
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client('YOUR_API_KEY')
+prompt= '''
+摘要：
+本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
+答案：
+'''
+# generate a prediction for a prompt 
+prediction = cl.generate(
+            model_name='clueai-large',
             prompt=prompt)
             
 # print the predicted text          

@@ -39,8 +39,6 @@ python setup.py install
 ```
 ## 快速开始
 
-在用这个库之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例
-
 ### 免费试玩
 
 
@@ -56,7 +54,7 @@ python setup.py install
 import clueai
 from clueai.classify import Example
 # initialize the Clueai Client with an API Key
-cl = clueai.Client('YOUR_API_KEY')
+cl = clueai.Client("", check_api_key=False)
 response = cl.classify(model_name='clueai-base',
   task_name='情感分析',
   inputs=["世界充满了欺骗", "世界和平"],
@@ -74,7 +72,7 @@ print('prediction: {}'.format(
 import clueai
 
 # initialize the Clueai Client with an API Key
-cl = clueai.Client('YOUR_API_KEY')
+cl = clueai.Client("", check_api_key=False)
 prompt= '''
 摘要：
 本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
@@ -92,7 +90,10 @@ print('prediction: {}'.format(prediction.generations[0].text))
 </tr>
 </table>
 
-### 分类和生成任务
+### 更大模型更好效果
+
+在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例
+
 
 <table>
 <tr>

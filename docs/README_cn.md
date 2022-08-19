@@ -18,7 +18,9 @@
 
 </p>
 
+
 *Read this in other languages: [English](README_en.md)
+
 
 # Python 软件包
 
@@ -102,4 +104,6 @@ print('prediction: {}'.format(prediction.generations[0].text))
 
 对于不同的任务返回相对应的clueai对象（例如，对于生成，将是“Generation”）。 
 
+
+ClueAI 被[Clue AI](https://clueai.cn) 支持，并且相关协议可以查看[licensed](./LICENSE).
 

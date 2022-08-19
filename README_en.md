@@ -7,48 +7,45 @@
 <br>
 <br>
 <br>
-<b>使NLP成为每个开发者的工具</b>
+<b>Making NLP part of every developer's toolkit. </b>
 </p>
 
 
 <p align=center>
 <a href=""> <img src="https://img.shields.io/badge/language-python3.6+-brightgreen.svg?style=plastic"></a>
+<a href="https://pypi.org/project/clueai/"><img src="https://img.shields.io/badge/pypi-0.0.0.1-brightgreen.svg?style=plastic"></a>
 <a href="https://pypi.org/project/clueai/"><img alt="PyPI" src="https://img.shields.io/pypi/v/clueai?label=PyPI&logo=pypi&logoColor=white&style=flat-square"></a>
 <a href="https://clueai.cn"><img src="https://www.modelfun.cn/assets/logo.57d43a51.png" width="30px"></a>
-
 </p>
 
-*Read this in other languages: [English](README_en.md)
+# Clueai Python SDK
 
-# Python 软件包
+This package provides functionality developed to simplify interfacing with the ClueAI API in Python 3.
 
-该软件包提供了开发的功能，以简化在python3中与clueai API的接口。
+## Installation
 
-## 安装
-
-可以使用 `pip`命令安装:
+The package can be installed with `pip`:
 
 ```bash
 pip install --upgrade clueai
 ```
 
-也可以通过源码:
+Install from source:
 
 ```bash
 python setup.py install
 ```
-## 快速开始
+## Quick Start
 
-在用这个库之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例
+To use this library, you must have an API key and specify it as a string when creating the `clueai.Client` object. API keys can be created through the [platform](https://www.clueai.cn/). This is a basic example of the creating the client and using the `generate` endpoint.
 
 
-
-### 分类和生成任务
+### Classify & Generate Tasks
 
 <table>
 <tr>
-<td> 分类任务 🔐 </td>
-<td> 生成任务 🔐⚡⚡ </td>
+<td> classify 🔐 </td>
+<td> generate 🔐⚡⚡ </td>
 </tr>
 <tr>
 <td>
@@ -94,12 +91,9 @@ print('prediction: {}'.format(prediction.generations[0].text))
 </table>
 
 
-## 模型介绍
+## Models
+When you call Clueai's APIs we decide on a good default model for your use-case behind the scenes. The default model is great to get you started, but in production environments we recommend that you specify the model size yourself via the `model_name` parameter.
 
-当您调用clueai的API时，我们为您的用例指定默认模型。 默认模型非常适合您开始使用，但是在生产环境中，我们建议您通过`model_name`参数自己指定特定模型。
-
-## 返回结果
-
-对于不同的任务返回相对应的clueai对象（例如，对于生成，将是“Generation”）。 
-
+## Responses
+All of the endpoint functions will return a Clueai object corresponding to the endpoint (e.g. for generation, it would be `Generation`). The responses can be found as instance variables of the object (e.g. generation would be `Generation.text`). Printing the Clueai response object itself will display an organized view of the instance variables.
 

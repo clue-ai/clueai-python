@@ -55,15 +55,15 @@ python setup.py install
 import clueai
 from clueai.classify import Example
 cl = clueai.Client("", check_api_key=False)
-response = cl.classify(model_name='clueai-base',
+response = cl.classify(
+  model_name='clueai-base',
   task_name='情感分析',
   inputs=["今天天气很好", "我不喜欢这个产品"],
   examples=[Example("基本都是欺骗", "消极"),
-   Example("基本都是惊喜", "积极")],
+            Example("基本都是惊喜", "积极")],
   labels = ["消极", "积极"])
   
-print('prediction: {}'.format(
-       response.classifications))
+print('prediction: {}'.format(response.classifications))
 ```
 </td>
 <td>
@@ -103,15 +103,15 @@ import clueai
 from clueai.classify import Example
 # initialize the Clueai Client with an API Key
 cl = clueai.Client('YOUR_API_KEY')
-response = cl.classify(model_name='clueai-large',
+response = cl.classify(
+  model_name='clueai-large',
   task_name='情感分析',
   inputs=["世界充满了欺骗", "世界和平"],
   examples=[Example("基本都是欺骗", "消极"),
    Example("基本都是惊喜", "积极")],
   labels = ["消极", "积极"])
   
-print('prediction: {}'.format(
-       response.classifications))
+print('prediction: {}'.format(response.classifications))
 ```
 </td>
 <td>

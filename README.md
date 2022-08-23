@@ -46,6 +46,7 @@ python setup.py install
 <tr>
 <td> 分类任务 🔐 </td>
 </tr>
+
 <tr>
 <td>
 
@@ -65,9 +66,6 @@ print('prediction: {}'.format(
        response.classifications))
 ```
 </td>
-<td>
-
-</td>
 </tr>
 </table>
 
@@ -80,6 +78,7 @@ print('prediction: {}'.format(
 <tr>
 <td> 分类任务 🔐 </td>
 </tr>
+
 <tr>
 <td>
 
@@ -98,9 +97,6 @@ response = cl.classify(model_name='clueai-large',
 print('prediction: {}'.format(
        response.classifications))
 ```
-</td>
-<td>
-
 </td>
 </tr>
 </table>

@@ -44,7 +44,8 @@ python setup.py install
 
 <table>
 <tr>
-<td> 分类任务 🔐 </td>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
 </tr>
 
 <tr>
@@ -53,11 +54,10 @@ python setup.py install
 ```python
 import clueai
 from clueai.classify import Example
-# initialize the Clueai Client with an API Key
 cl = clueai.Client("", check_api_key=False)
 response = cl.classify(model_name='clueai-base',
   task_name='情感分析',
-  inputs=["世界充满了欺骗", "世界和平"],
+  inputs=["今天天气很好", "我不喜欢这个产品"],
   examples=[Example("基本都是欺骗", "消极"),
    Example("基本都是惊喜", "积极")],
   labels = ["消极", "积极"])
@@ -66,6 +66,21 @@ print('prediction: {}'.format(
        response.classifications))
 ```
 </td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+  --header 'Content-Type: application/json' \
+  --header 'Model-name: clueai-base' \
+  --data '{
+    "task_type": "classify",
+    "task_name": "情感分析",
+    "input_data": ["今天天气很好", "我不喜欢这个产品"],
+    "labels": ["消极", "积极"]
+  }'
+```
+</td>
+
 </tr>
 </table>
 
@@ -76,7 +91,8 @@ print('prediction: {}'.format(
 
 <table>
 <tr>
-<td> 分类任务 🔐 </td>
+<td> python 🔐 </td>
+<td> curl 🔐 </td>
 </tr>
 
 <tr>
@@ -98,6 +114,22 @@ print('prediction: {}'.format(
        response.classifications))
 ```
 </td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+  --header 'Content-Type: application/json' \
+  --header 'Model-name: clueai-large' \
+  --header 'Api-Key: BEARER {api_key}' \
+  --data '{
+    "task_type": "classify",
+    "task_name": "情感分析",
+    "input_data": ["今天天气很好", "我不喜欢这个产品"],
+    "labels": ["消极", "积极"]
+  }'
+```
+</td>
+
 </tr>
 </table>
 

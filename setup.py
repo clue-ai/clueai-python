@@ -20,10 +20,9 @@ class BinaryDistribution(Distribution):
     def has_ext_modules(foo) -> bool:
         return True
 
-
 setuptools.setup(
     name='clueai',
-    version='0.0.0.1',
+    version='0.0.0.2',
     author='matrix',
     author_email='brightmart@hotmail.com',
     description='A Python library for the ClueAI API',

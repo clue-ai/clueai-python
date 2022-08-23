@@ -45,7 +45,6 @@ python setup.py install
 <table>
 <tr>
 <td> 分类任务 🔐 </td>
-<td> 生成任务 🔐⚡⚡ </td>
 </tr>
 <tr>
 <td>
@@ -68,37 +67,18 @@ print('prediction: {}'.format(
 </td>
 <td>
 
-```python
-import clueai
-
-# initialize the Clueai Client with an API Key
-cl = clueai.Client("", check_api_key=False)
-prompt= '''
-摘要：
-本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
-答案：
-'''
-# generate a prediction for a prompt 
-prediction = cl.generate(
-            model_name='clueai-base',
-            prompt=prompt)
-            
-# print the predicted text          
-print('prediction: {}'.format(prediction.generations[0].text))
-```
 </td>
 </tr>
 </table>
 
 ### 更大模型更好效果
 
-在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例
+在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.qclue.cn/)获得，下面是有关分类和生成任务的一个基本的示例
 
 
 <table>
 <tr>
 <td> 分类任务 🔐 </td>
-<td> 生成任务 🔐⚡⚡ </td>
 </tr>
 <tr>
 <td>
@@ -121,24 +101,6 @@ print('prediction: {}'.format(
 </td>
 <td>
 
-```python
-import clueai
-
-# initialize the Clueai Client with an API Key
-cl = clueai.Client('YOUR_API_KEY')
-prompt= '''
-摘要：
-本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
-答案：
-'''
-# generate a prediction for a prompt 
-prediction = cl.generate(
-            model_name='clueai-large',
-            prompt=prompt)
-            
-# print the predicted text          
-print('prediction: {}'.format(prediction.generations[0].text))
-```
 </td>
 </tr>
 </table>
@@ -150,6 +112,6 @@ print('prediction: {}'.format(prediction.generations[0].text))
 
 ## 返回结果
 
-对于不同的任务返回相对应的clueai对象（例如，对于生成，将是“Generation”）。 
+对于不同的任务返回相对应的clueai对象（例如，对于分类，将是“Classification”）。 
 
-ClueAI 被[Clue AI](https://clueai.cn) 支持，并且相关协议可以查看[licensed](./LICENSE).
+ClueAI 被[Clue AI](https://qclue.cn) 支持，并且相关协议可以查看[licensed](./LICENSE).

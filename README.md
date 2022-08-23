@@ -142,4 +142,4 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 对于不同的任务返回相对应的clueai对象（例如，对于分类，将是“Classification”）。 
 
-ClueAI 被[Clue AI](https://qclue.cn) 支持，并且相关协议可以查看[licensed](./LICENSE).
+ClueAI 被[ClueAI](https://qclue.cn) 支持，并且相关协议可以查看[licensed](./LICENSE).

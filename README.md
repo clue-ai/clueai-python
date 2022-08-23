@@ -92,7 +92,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 <table>
 <tr>
 <td> python 🔐 </td>
-<td> curl 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
 </tr>
 
 <tr>

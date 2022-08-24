@@ -19,7 +19,7 @@
 
 </p>
 
-*Read this in other languages: [English](README_en.md)
+*Read this in other languages: [English](docs/README_en.md)
 
 # Python 软件包
 

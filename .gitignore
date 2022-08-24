@@ -1,6 +1,6 @@
 .env
 .DS_Store
-test.ipynb
+*.ipynb
 builder.sh
 test.py
 build/

@@ -41,6 +41,9 @@ python setup.py install
 
 ### 免费试玩
 
+* 使用colab一键运行使用
+  
+  [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
 
 <table>
 <tr>
@@ -56,13 +59,10 @@ import clueai
 from clueai.classify import Example
 cl = clueai.Client("", check_api_key=False)
 response = cl.classify(
-  model_name='clueai-base',
-  task_name='情感分析',
-  inputs=["今天天气很好", "我不喜欢这个产品"],
-  examples=[Example("基本都是欺骗", "消极"),
-            Example("基本都是惊喜", "积极")],
-  labels = ["消极", "积极"])
-  
+      model_name='clueai-base',
+      task_name='产品分类',
+      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+      labels = ["美颜", "二手", "外卖", "办公", "求职"])
 print('prediction: {}'.format(response.classifications))
 ```
 </td>
@@ -70,14 +70,15 @@ print('prediction: {}'.format(response.classifications))
 
 ```python
 curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
-  --header 'Content-Type: application/json' \
-  --header 'Model-name: clueai-base' \
-  --data '{
-    "task_type": "classify",
-    "task_name": "情感分析",
-    "input_data": ["今天天气很好", "我不喜欢这个产品"],
-    "labels": ["消极", "积极"]
-  }'
+    --header 'Content-Type: application/json' \
+    --header 'Model-name: clueai-base' \
+    --data '{
+       "task_type": "classify",
+       "task_name": "产品分类",
+       "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+       "labels": ["美颜", "二手", "外卖", "办公", "求职"]
+       }'
+
 ```
 </td>
 
@@ -106,10 +107,9 @@ cl = clueai.Client('YOUR_API_KEY')
 response = cl.classify(
   model_name='clueai-base',
   task_name='情感分析',
-  inputs=["今天天气很好", "我不喜欢这个产品"],
-  examples=[Example("基本都是欺骗", "消极"),
-            Example("基本都是惊喜", "积极")],
-  labels = ["消极", "积极"])
+  task_name='产品分类',
+      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+      labels = ["美颜", "二手", "外卖", "办公", "求职"])
   
 print('prediction: {}'.format(response.classifications))
 ```
@@ -122,11 +122,11 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
   --header 'Model-name: clueai-large' \
   --header 'Api-Key: BEARER {api_key}' \
   --data '{
-    "task_type": "classify",
-    "task_name": "情感分析",
-    "input_data": ["今天天气很好", "我不喜欢这个产品"],
-    "labels": ["消极", "积极"]
-  }'
+       "task_type": "classify",
+       "task_name": "产品分类",
+       "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+       "labels": ["美颜", "二手", "外卖", "办公", "求职"]
+       }'
 ```
 </td>
 

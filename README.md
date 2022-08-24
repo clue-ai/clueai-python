@@ -109,8 +109,8 @@ response = cl.classify(
   model_name='clueai-base',
   task_name='情感分析',
   task_name='产品分类',
-      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
-      labels = ["美颜", "二手", "外卖", "办公", "求职"])
+  inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+  labels = ["美颜", "二手", "外卖", "办公", "求职"])
   
 print('prediction: {}'.format(response.classifications))
 ```

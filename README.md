@@ -46,6 +46,7 @@ python setup.py install
   
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
 
+### 文本分类
 <table>
 <tr>
 <td> python 🔐 </td>
@@ -78,6 +79,53 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
        "task_name": "产品分类",
        "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
        "labels": ["美颜", "二手", "外卖", "办公", "求职"]
+       }'
+
+```
+</td>
+
+</tr>
+</table>
+
+### 文本生成
+<table>
+<tr>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
+</tr>
+
+<tr>
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+prompt= '''
+摘要：
+本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
+答案：
+'''
+# generate a prediction for a prompt 
+prediction = cl.generate(
+            model_name='clueai-base',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+    --header 'Content-Type: application/json' \
+    --header 'Model-name: clueai-base' \
+    --data '{
+       "task_type": "generate",
+       "task_name": "摘要",
+       "input_data": ["为下面的文章生成摘要：\n国家食药监管总局近日发布《食品召回管理办法》，明确：食用后已经或可能导致严重健康损害甚至死亡的，属一级召回，食品生产者应在知悉食品安全风险后24小时内启动召回，且自公告发布之日起10个工作日内完成召回。\n摘要："]
        }'
 
 ```
@@ -134,6 +182,53 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 </tr>
 </table>
 
+### 文本生成
+<table>
+<tr>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
+</tr>
+
+<tr>
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client('YOUR_API_KEY')
+prompt= '''
+摘要：
+本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
+答案：
+'''
+# generate a prediction for a prompt 
+prediction = cl.generate(
+            model_name='clueai-base',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+    --header 'Content-Type: application/json' \
+   --header 'Model-name: clueai-large' \
+  --header 'Api-Key: BEARER {api_key}' \
+    --data '{
+       "task_type": "generate",
+       "task_name": "摘要",
+       "input_data": ["为下面的文章生成摘要：\n国家食药监管总局近日发布《食品召回管理办法》，明确：食用后已经或可能导致严重健康损害甚至死亡的，属一级召回，食品生产者应在知悉食品安全风险后24小时内启动召回，且自公告发布之日起10个工作日内完成召回。\n摘要："]
+       }'
+
+```
+</td>
+
+</tr>
+</table>
 
 ## 模型介绍
 

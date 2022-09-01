@@ -204,7 +204,7 @@ prompt= '''
 '''
 # generate a prediction for a prompt 
 prediction = cl.generate(
-            model_name='clueai-base',
+            model_name='clueai-large',
             prompt=prompt)
             
 # print the predicted text          

@@ -138,7 +138,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.qclue.cn/)获得，下面是有关分类和生成任务的一个基本的示例
 
-
+### 文本分类
 <table>
 <tr>
 <td> python 🔐 </td>

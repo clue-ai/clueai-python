@@ -135,7 +135,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 </table>
 
 ### 示例输入
-#### 新闻分类
+#### 新闻分类(classify)
 ```bash
 Input:
 新闻分类：
@@ -147,7 +147,7 @@ Model output::
 国际
 ```
 
-#### 意图分类
+#### 意图分类(classify)
 ```bash
 Input:
 意图分类：
@@ -159,7 +159,7 @@ Model output::
 酒店
 ```
 
-#### 情感分析
+#### 情感分析(classify)
 ```bash
 Input:
 情感分析：
@@ -171,7 +171,7 @@ Model output::
 消极
 ```
 
-#### 推理
+#### 推理(generate)
 ```bash
 Input:
 推理关系判断：
@@ -184,7 +184,7 @@ Model output::
 矛盾
 ```
 
-#### 阅读理解
+#### 阅读理解(generate)
 ```bash
 Input:
 阅读理解：
@@ -198,7 +198,7 @@ Input:
 Model output::
 联邦政府应对猴痘疫情行动迟缓,分发试剂和疫苗的工作出现延误,影响了遏制疫情传播的能力
 ```
-#### 阅读理解-自由式
+#### 阅读理解-自由式(generate)
 ```bash
 Input:
 阅读以下对话并回答问题。
@@ -211,7 +211,7 @@ Model output::
 感冒了
 ```
 
-#### 摘要
+#### 摘要(generate)
 ```bash
 Input:
 为下面的文章生成摘要：
@@ -222,7 +222,7 @@ Model output::
 四川甘孜州泸定县发生6.8级地震
 ```
 
-#### 翻译-中英
+#### 翻译-中英(generate)
 ```bash
 Input:
 翻译成英文：
@@ -233,7 +233,7 @@ Model output::
 The Speaker went to Taiwan, and the Chinese people were angry.
 ```
 
-#### 翻译-英中
+#### 翻译-英中(generate)
 ```bash
 Input:
 翻译成中文：
@@ -243,7 +243,7 @@ This is a dialogue robot that can talk to people.
 Model output::
 这是一个能与人对话的机器人。
 ```
-#### 信息抽取
+#### 信息抽取(generate)
 ```bash
 Input:
 信息抽取：

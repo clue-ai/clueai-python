@@ -97,16 +97,26 @@ class Client:
     def text2image(
         self,
         prompt: str,
+        model_name: str = None,
         style: str="",
-        file_path: str="test.png"
+        out_file_path: str="test.png"
         ) -> None:
         url = f"{self.text_2_image_api_url}{prompt}"
         if style:
             url = f"{self.text_2_image_api_url}使用{style}风格画{prompt}"
+        
+        headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+            'Model-name': model_name
+        }
+        if self.modelfun_version != '':
+            headers['clueai-Version'] = self.modelfun_version
 
-        response = requests.get(url)
+        response = requests.get(url, headers=headers)
         img = response.content
-        with open(file_path, "wb") as f:
+        with open(out_file_path, "wb") as f:
             f.write(img)
 
     def generate(

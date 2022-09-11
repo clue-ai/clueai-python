@@ -46,6 +46,33 @@ python setup.py install
   
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
 
+### 文本生成图像
+<table>
+<tr>
+<td> python 🔐 </td>
+</tr>
+
+<tr>
+<td>
+
+```python
+import clueai
+from PIL import Image
+cl = clueai.Client("", check_api_key=False)
+response = cl.text2image(
+      model_name='clueai-base',
+      prompt="秋日的晚霞",
+      style="毕加索",
+      out_file_path="test.png") 
+
+im = Image.open('test.png')
+im.show()
+```
+</td>
+
+</tr>
+</table>
+
 ### 文本分类
 <table>
 <tr>

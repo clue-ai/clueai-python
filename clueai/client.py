@@ -93,7 +93,7 @@ class Client:
                 http_status=response.status_code,
                 headers=response.headers)
         return res
-    
+
     def text2image(
         self,
         prompt: str,

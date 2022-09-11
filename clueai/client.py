@@ -45,6 +45,7 @@ class Client:
     ) -> None:
         self.api_key = api_key
         self.api_url = clueai.MODELFUN_API_URL
+        self.text_2_image_api_url = clueai.TEXT_TO_IMAGE_URL
         self.num_workers = num_workers
         self.request_dict = request_dict
         if version is None:
@@ -92,6 +93,21 @@ class Client:
                 http_status=response.status_code,
                 headers=response.headers)
         return res
+    
+    def text2image(
+        self,
+        prompt: str,
+        style: str="",
+        file_path: str="test.png"
+        ) -> None:
+        url = f"{self.text_2_image_api_url}{prompt}"
+        if style:
+            url = f"{self.text_2_image_api_url}使用{style}风格画{prompt}"
+
+        response = requests.get(url)
+        img = response.content
+        with open(file_path, "wb") as f:
+            f.write(img)
 
     def generate(
         self,

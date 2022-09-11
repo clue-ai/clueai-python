@@ -45,7 +45,8 @@ python setup.py install
 * 使用colab一键运行使用
   
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
-
+* 文本生成图像可以直接使用<a href="http://modelfun.westlake.ink:6001/clueai/text2imagedemo/"><img src="docs/imgs/painting.png" width="30px"></a>
+  
 ### 文本生成图像
 <table>
 <tr>

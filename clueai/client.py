@@ -132,7 +132,8 @@ class Client:
         frequency_penalty: float = 0.0,
         presence_penalty: float = 0.0,
         stop_sequences: List[str] = None,
-        return_likelihoods: str = None
+        return_likelihoods: str = None,
+        headers: dict = {}
     ) -> Generations:
         json_body = json.dumps({
             'task_type': "generate",
@@ -148,7 +149,7 @@ class Client:
             'stop_sequences': stop_sequences,
             'return_likelihoods': return_likelihoods
         }, ensure_ascii=False)
-        response = self.__request(json_body, clueai.GENERATE_URL, model_name)
+        response = self.__request(json_body, clueai.GENERATE_URL, model_name, headers=headers)
         #print(f"res: {response}")
         generations: List[Generation] = []
         for gen in response['result']:
@@ -264,23 +265,23 @@ class Client:
                 headers=req.getAllResponseHeaders())
         return res
 
-    def __request(self, json_body, endpoint, model_name) -> Any:
-        headers = {
+    def __request(self, json_body, endpoint, model_name, headers={}) -> Any:
+        tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Content-Type': 'application/json',
             'Request-Source': 'python-sdk',
             'Model-name': model_name
         }
         if self.modelfun_version != '':
-            headers['clueai-Version'] = self.modelfun_version
-
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        tmp_headers.update(headers)
         url = urljoin(self.api_url, endpoint)
         #print(json_body)
         if use_xhr_client:
-            response = self.__pyfetch(url, headers, json_body)
+            response = self.__pyfetch(url, tmp_headers, json_body)
             return response
         else:
-            response = requests.post(url, json=json.loads(json_body), headers=headers)
+            response = requests.post(url, json=json.loads(json_body), headers=tmp_headers)
             try:
                 res = json.loads(response.text)
             except Exception:

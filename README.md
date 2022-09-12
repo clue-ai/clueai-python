@@ -45,7 +45,8 @@ python setup.py install
 * 使用colab一键运行使用
   
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
-* 文本生成图像可以直接使用<a href="https://clueai.cn/clueai/text2imagedemo/" target="_blank"><img src="docs/imgs/painting.png" width="30px"></a>
+
+* 文本生成图像可以直接使用[绘图师](https://clueai.cn/clueai/t2i/) <a href="https://clueai.cn/clueai/t2i/" target="_blank"><img src="docs/imgs/painting.png" width="30px"></a>
   
 ### 文本生成图像
 <table>

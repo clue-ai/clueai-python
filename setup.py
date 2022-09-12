@@ -22,7 +22,7 @@ class BinaryDistribution(Distribution):
 
 setuptools.setup(
     name='clueai',
-    version='0.0.0.5',
+    version='0.0.0.6',
     author='matrix',
     author_email='brightmart@hotmail.com',
     description='A Python library for the ClueAI API',

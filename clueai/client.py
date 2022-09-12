@@ -41,15 +41,13 @@ class Client:
         version: str = None,
         num_workers: int = 8,
         request_dict: dict = {},
-        check_api_key: bool = True,
-        headers: dict = {}
+        check_api_key: bool = True
     ) -> None:
         self.api_key = api_key
         self.api_url = clueai.MODELFUN_API_URL
         self.text_2_image_api_url = clueai.TEXT_TO_IMAGE_URL
         self.num_workers = num_workers
         self.request_dict = request_dict
-        self.headers = headers
         if version is None:
             self.modelfun_version = clueai.MODELFUN_VERSION
         else:
@@ -101,7 +99,8 @@ class Client:
         prompt: str,
         model_name: str = None,
         style: str="",
-        out_file_path: str="test.png"
+        out_file_path: str="test.png", 
+        headers: dict = {}
         ) -> None:
         url = f"{self.text_2_image_api_url}{prompt}"
         if style:
@@ -115,8 +114,8 @@ class Client:
         }
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
-        self.headers.update(tmp_headers)
-        response = requests.get(url, headers=self.headers)
+        tmp_headers.update(headers)
+        response = requests.get(url, headers=tmp_headers)
         img = response.content
         with open(out_file_path, "wb") as f:
             f.write(img)
@@ -266,23 +265,22 @@ class Client:
         return res
 
     def __request(self, json_body, endpoint, model_name) -> Any:
-        tmp_headers = {
+        headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Content-Type': 'application/json',
             'Request-Source': 'python-sdk',
             'Model-name': model_name
         }
         if self.modelfun_version != '':
-            tmp_headers['clueai-Version'] = self.modelfun_version
-        self.headers.update(tmp_headers)
+            headers['clueai-Version'] = self.modelfun_version
 
         url = urljoin(self.api_url, endpoint)
         #print(json_body)
         if use_xhr_client:
-            response = self.__pyfetch(url, self.headers, json_body)
+            response = self.__pyfetch(url, headers, json_body)
             return response
         else:
-            response = requests.post(url, json=json.loads(json_body), headers=self.headers)
+            response = requests.post(url, json=json.loads(json_body), headers=headers)
             try:
                 res = json.loads(response.text)
             except Exception:

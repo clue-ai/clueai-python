@@ -391,5 +391,7 @@ ClueAI 被[ClueAI](https://clueai.cn) 支持，并且相关协议可以查看[li
 
 ## 问题反馈和技术交流
 
-   <img src="https://github.com/clue-ai/clueai-python/blob/main/docs/imgs/clueai.jpeg"  width="40%" height="40%" />   
+   <img src="https://github.com/clue-ai/clueai-python/blob/main/docs/imgs/clueai.jpeg"  width="35%" height="35%" />   
+   
+   <img src="https://github.com/clue-ai/clueai-python/blob/main/docs/imgs/brightmart.jpeg"  width="35%" height="35%" />   
 

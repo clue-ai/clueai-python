@@ -92,6 +92,14 @@ Model output:
 ```
 ![avatar](docs/imgs/室内设计.png)
 
+```bash
+Input:
+prompt: 婚礼鲜花
+
+Model output:
+```
+![avatar](docs/imgs/室内设计.png)
+
 ### 文本分类
 <table>
 <tr>

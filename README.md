@@ -119,7 +119,7 @@ Model output:
 
 ```bash
 Input:
-prompt: 远处有雪山的蓝色湖泊，蓝天白云，空中有很多鸟
+prompt: 远处有雪山的蓝色湖泊，蓝天白云，很多鸟
 
 Model output:
 ```

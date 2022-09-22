@@ -98,7 +98,32 @@ prompt: 婚礼鲜花
 
 Model output:
 ```
-![avatar](docs/imgs/室内设计.png)
+![avatar](docs/imgs/婚礼鲜花.png)
+
+```bash
+Input:
+prompt: 浩瀚星空
+
+Model output:
+```
+![avatar](docs/imgs/浩瀚星空.png)
+
+```bash
+Input:
+prompt: 浩瀚星空
+style: 梵高
+
+Model output:
+```
+![avatar](docs/imgs/浩瀚星空-梵高.png)
+
+```bash
+Input:
+prompt: 远处有雪山的蓝色湖泊，蓝天白云，空中有很多鸟
+
+Model output:
+```
+![avatar](docs/imgs/雪山.png)
 
 ### 文本分类
 <table>

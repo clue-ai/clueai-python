@@ -86,11 +86,11 @@ Model output:
 
 ```bash
 Input:
-prompt: 秋日的晚霞
+prompt: 室内设计
 
 Model output:
 ```
-![avatar](docs/imgs/秋日的晚霞.png)
+![avatar](docs/imgs/室内设计.png)
 
 ### 文本分类
 <table>

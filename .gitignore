@@ -1,4 +1,5 @@
 .env
+test1.py
 upload.sh
 *test.png
 .DS_Store

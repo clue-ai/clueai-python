@@ -15,6 +15,7 @@ import clueai
 from clueai.embeddings import Embeddings
 from clueai.error import ClueaiError
 from clueai.generation import Generations, Generation, TokenLikelihood
+from clueai.match import Match, Matches, Score
 from clueai.tokenize import Tokens
 from clueai.classify import Classifications, Classification, Example as ClassifyExample, Confidence
 from clueai.extract import Entity, Example as ExtractExample, Extraction, Extractions
@@ -46,6 +47,7 @@ class Client:
         self.api_key = api_key
         self.api_url = clueai.MODELFUN_API_URL
         self.text_2_image_api_url = clueai.TEXT_TO_IMAGE_URL
+        self.clueai_api_url = clueai.CLUEAI_API_URL
         self.num_workers = num_workers
         self.request_dict = request_dict
         if version is None:
@@ -93,6 +95,66 @@ class Client:
                 http_status=response.status_code,
                 headers=response.headers)
         return res
+
+    def upload_corpus(
+        self,
+        file: str,
+        field: str,
+        headers: dict = {},
+        model_name: str = None
+        ):
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+            'Model-name': model_name
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        data_json = {
+            "field": field
+        }
+        files = {'file': open(file,'rb')}
+        tmp_headers.update(headers)
+
+        print(files, data_json, f"{self.clueai_api_url}/search/upload/")
+        res = requests.post(f"{self.clueai_api_url}/search/upload/", 
+            files=files, data=data_json, headers=headers)
+        
+        #key =  res.json()["key"]
+        return res
+    
+    def search(
+        self, 
+        query: str,
+        corpus_key: str,
+        headers: dict = {},
+        model_name: str = None
+        ):
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+            'Model-name': model_name
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        tmp_headers.update(headers)
+        response = requests.get(f"{self.clueai_api_url}/search/?key={corpus_key}&query={query}",
+            headers=tmp_headers)
+        response = response.json()
+        result =  response['result']
+        scoreObj = []
+        for answer, score in result['answer_score'].items():
+            scoreObj.append(Score(
+                answer, float(score)
+                ))
+
+
+        match_instance = Match(result['query'], result['best_answer'], scoreObj)
+            
+
+        return Matches([match_instance])
 
     def text2image(
         self,
@@ -196,7 +258,6 @@ class Client:
                 confidenceObj.append(Confidence(
                     res['confidence'][i]['label'],
                     res['confidence'][i]['confidence']))
-            Classification(res['input'], res['prediction'], confidenceObj)
             classifications.append(Classification(
                 res['input'], res['prediction'], confidenceObj))
 

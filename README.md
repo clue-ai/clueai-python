@@ -161,7 +161,7 @@ response = cl.search(
       model_name='clueai-base',
       engine_key=engine_key,
       query="法律案例"
-)
+      )
 print('prediction: {}'.format(response.matches))
 ```
 

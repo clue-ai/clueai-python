@@ -144,7 +144,7 @@ import clueai
 cl = clueai.Client("", check_api_key=False)
 response = cl.upload_corpus(
       model_name='clueai-base',
-      file_path="test.json",
+      file_path="law_test.json",
       field="title"
       )
 engine_key = response["engine_key"]

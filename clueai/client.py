@@ -98,7 +98,7 @@ class Client:
 
     def upload_corpus(
         self,
-        file: str,
+        file_path: str,
         field: str,
         headers: dict = {},
         model_name: str = None
@@ -114,7 +114,7 @@ class Client:
         data_json = {
             "field": field
         }
-        files = {'file': open(file,'rb')}
+        files = {'file': open(file_path,'rb')}
         tmp_headers.update(headers)
 
         print(files, data_json, f"{self.clueai_api_url}/search/upload/")
@@ -122,12 +122,12 @@ class Client:
             files=files, data=data_json, headers=headers)
         
         #key =  res.json()["key"]
-        return res
+        return res.json()
     
     def search(
         self, 
         query: str,
-        corpus_key: str,
+        engine_key: str,
         headers: dict = {},
         model_name: str = None
         ):
@@ -140,7 +140,7 @@ class Client:
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
-        response = requests.get(f"{self.clueai_api_url}/search/?key={corpus_key}&query={query}",
+        response = requests.get(f"{self.clueai_api_url}/search/?key={engine_key}&query={query}",
             headers=tmp_headers)
         response = response.json()
         result =  response['result']

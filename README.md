@@ -125,9 +125,10 @@ Model output:
 ```
 ![avatar](docs/imgs/雪山.png)
 
-### 构建引擎服务
-
-首先通过上传数据文件(json)和指定需要匹配的文本字段，借助clueai构建独立引擎服务，然后通过传入query和corpus_key即可使用, 可以参考examples下的test.json
+### 构建引擎服务（推荐/问答/搜索）
+#### 上传库-->调用
+首先通过上传数据文件(json)和指定需要查询的文本字段，借助clueai构建独立引擎服务； 
+然后通过传入需要推荐/问题的query和引擎的engine_key即可使用, 可以参考examples下的test.json
 
 <table>
 <tr>
@@ -144,7 +145,7 @@ import clueai
 cl = clueai.Client("", check_api_key=False)
 response = cl.upload_corpus(
       model_name='clueai-base',
-      file_path="law_test.json",
+      file_path="./examples/law_test.json",
       field="title"
       )
 engine_key = response["engine_key"]

@@ -3,7 +3,7 @@
 <br>
 <br>
 <br>
-<a href="https://qclue.cn"><img src="https://www.modelfun.cn/assets/logo.57d43a51.png" alt="CLUEAI logo: The data structure for unstructured data" width="200px"></>
+<a href="https://qclue.cn"><img src="docs/imgs/logo.png" alt="CLUEAI logo: The data structure for unstructured data" width="200px"></>
 <br>
 <br>
 <br>

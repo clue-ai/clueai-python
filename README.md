@@ -21,6 +21,42 @@
 
 *Read this in other languages: [English](docs/README_en.md)
 
+- [Python 软件包](#python-软件包)
+  - [安装](#安装)
+  - [快速开始](#快速开始)
+    - [免费试玩](#免费试玩)
+    - [文本生成图像](#文本生成图像)
+      - [图片生成示例输入](#图片生成示例输入)
+      - [图片生成示例输出](#图片生成示例输出)
+    - [构建引擎服务（推荐/问答/搜索）](#构建引擎服务推荐问答搜索)
+      - [上传库-->调用](#上传库--调用)
+    - [文本分类](#文本分类)
+    - [文本生成](#文本生成)
+    - [示例输入](#示例输入)
+      - [新闻分类(classify)](#新闻分类classify)
+      - [意图分类(classify)](#意图分类classify)
+      - [情感分析(classify)](#情感分析classify)
+      - [推理(generate)](#推理generate)
+      - [阅读理解(generate)](#阅读理解generate)
+      - [阅读理解-自由式(generate)](#阅读理解-自由式generate)
+      - [摘要(generate)](#摘要generate)
+      - [翻译-中英(generate)](#翻译-中英generate)
+      - [翻译-英中(generate)](#翻译-英中generate)
+      - [通用信息抽取(generate)](#通用信息抽取generate)
+      - [简历信息抽取(generate)](#简历信息抽取generate)
+      - [医疗信息抽取(generate)](#医疗信息抽取generate)
+      - [电商客户需求分析(classify)](#电商客户需求分析classify)
+      - [医疗语义相似度(classify)](#医疗语义相似度classify)
+      - [问题生成(generate)](#问题生成generate)
+      - [指代消解(generate)](#指代消解generate)
+      - [关键词抽取(generate)](#关键词抽取generate)
+      - [情感倾向(classify)](#情感倾向classify)
+    - [更大模型更好效果](#更大模型更好效果)
+      - [文本分类](#文本分类-1)
+      - [文本生成](#文本生成-1)
+  - [模型介绍](#模型介绍)
+  - [返回结果](#返回结果)
+  - [问题反馈和技术交流](#问题反馈和技术交流)
 # Python 软件包
 
 该软件包提供了开发的功能，以简化在python3中与clueai API的接口。
@@ -75,55 +111,47 @@ im.show()
 </tr>
 </table>
 
-### 示例输入
+#### 图片生成示例输入
 ```bash
-Input:
 prompt: 秋日的晚霞
-
-Model output:
 ```
-![avatar](docs/imgs/秋日的晚霞.png)
+
 
 ```bash
-Input:
 prompt: 室内设计
-
-Model output:
 ```
-![avatar](docs/imgs/室内设计.png)
+
 
 ```bash
-Input:
 prompt: 婚礼鲜花
-
-Model output:
 ```
-![avatar](docs/imgs/婚礼鲜花.png)
+
 
 ```bash
-Input:
 prompt: 浩瀚星空
-
-Model output:
 ```
-![avatar](docs/imgs/浩瀚星空.png)
+
 
 ```bash
-Input:
 prompt: 浩瀚星空
 style: 梵高
-
-Model output:
 ```
-![avatar](docs/imgs/浩瀚星空-梵高.png)
+
 
 ```bash
-Input:
 prompt: 远处有雪山的蓝色湖泊，蓝天白云，很多鸟
-
-Model output:
 ```
-![avatar](docs/imgs/雪山.png)
+
+#### 图片生成示例输出
+
+<p float="left">
+   <img src="docs/imgs/秋日的晚霞.png"  width="30%" height="30%" />   
+   <img src="docs/imgs/室内设计.png"  width="30%" height="30%" />   
+   <img src="docs/imgs/婚礼鲜花.png"  width="30%" height="30%" /> 
+   <img src="docs/imgs/浩瀚星空.png"  width="30%" height="30%" /> 
+   <img src="docs/imgs/浩瀚星空-梵高.png"  width="30%" height="30%" /> 
+   <img src="docs/imgs/雪山.png"  width="30%" height="30%" /> 
+</p>  
 
 ### 构建引擎服务（推荐/问答/搜索）
 #### 上传库-->调用
@@ -484,7 +512,7 @@ Model output::
 
 在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.qclue.cn/)获得，下面是有关分类和生成任务的一个基本的示例
 
-### 文本分类
+#### 文本分类
 <table>
 <tr>
 <td> python 🔐 </td>
@@ -528,7 +556,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 </tr>
 </table>
 
-### 文本生成
+#### 文本生成
 <table>
 <tr>
 <td> python 🔐 </td>
@@ -591,6 +619,8 @@ ClueAI 被[ClueAI](https://clueai.cn) 支持，并且相关协议可以查看[li
 <p float="left">
    <img src="https://github.com/clue-ai/clueai-python/blob/main/docs/imgs/clueai.jpeg"  width="35%" height="35%" />   
    <img src="https://github.com/clue-ai/clueai-python/blob/main/docs/imgs/brightmart.jpeg"  width="35%" height="35%" /> 
-</p>  
+</p> 
+
+
 
 

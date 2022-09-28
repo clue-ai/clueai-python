@@ -101,7 +101,8 @@ class Client:
         file_path: str,
         field: str,
         headers: dict = {},
-        model_name: str = None
+        model_name: str = None,
+        sync: bool = False
         ):
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
@@ -117,11 +118,9 @@ class Client:
         files = {'file': open(file_path,'rb')}
         tmp_headers.update(headers)
 
-        print(files, data_json, f"{self.clueai_api_url}/search/upload/")
-        res = requests.post(f"{self.clueai_api_url}/search/upload/", 
+        is_sync = "sync/" if sync else ""
+        res = requests.post(f"{self.clueai_api_url}/search/upload/{is_sync}", 
             files=files, data=data_json, headers=headers)
-        
-        #key =  res.json()["key"]
         return res.json()
     
     def search(

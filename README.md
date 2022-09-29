@@ -55,6 +55,12 @@
 - [模型介绍](#模型介绍)
 - [返回结果](#返回结果)
 - [问题反馈和技术交流](#问题反馈和技术交流)
+
+#### 更新Update 2022-09-29
+PromptCLUE: 中文多任务Prompt预训练模型，已经开源！
+
+<a href='https://github.com/clue-ai/PromptCLUE'>github项目地址</a> | <a href='https://huggingface.co/ClueAI/PromptCLUE'>模型下载</a>
+
 ## Python 软件包
 
 该软件包提供了开发的功能，以简化在python3中与clueai API的接口。

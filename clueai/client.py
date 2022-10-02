@@ -119,7 +119,7 @@ class Client:
         tmp_headers.update(headers)
 
         is_sync = "sync/" if sync else ""
-        res = requests.post(f"{self.clueai_api_url}/search/upload/{is_sync}", 
+        res = requests.post(f"{self.clueai_api_url}/search/upload/{is_sync}",
             files=files, data=data_json, headers=headers)
         return res.json()
     
@@ -163,9 +163,9 @@ class Client:
         out_file_path: str="test.png", 
         headers: dict = {}
         ) -> None:
-        url = f"{self.text_2_image_api_url}{prompt}"
+        url = f"{self.text_2_image_api_url}?text={prompt}"
         if style:
-            url = f"{self.text_2_image_api_url}使用{style}风格画{prompt}"
+            url = f"{self.text_2_image_api_url}?text={style}风格，{prompt}"
         
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),

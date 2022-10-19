@@ -211,7 +211,6 @@ class Client:
             'return_likelihoods': return_likelihoods
         }, ensure_ascii=False)
         response = self.__request(json_body, clueai.GENERATE_URL, model_name, headers=headers)
-        #print(f"res: {response}")
         generations: List[Generation] = []
         if "result" not in response:
             raise ClueaiError('No result in response, please check or try.')

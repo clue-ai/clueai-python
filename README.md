@@ -262,6 +262,7 @@ prompt= '''
 答案：
 '''
 # generate a prediction for a prompt 
+# 需要返回得分的话，指定return_likelihoods="GENERATION"
 prediction = cl.generate(
             model_name='clueai-base',
             prompt=prompt)

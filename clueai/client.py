@@ -213,7 +213,7 @@ class Client:
         response = self.__request(json_body, clueai.GENERATE_URL, model_name, headers=headers)
         generations: List[Generation] = []
         if "result" not in response:
-            raise ClueaiError('No result in response, please check or try.')
+            raise ClueaiError(f'No result in response, please check or try. error{response.json()}')
         for gen in response['result']:
             likelihood = None
             token_likelihoods = None

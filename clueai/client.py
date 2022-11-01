@@ -194,7 +194,8 @@ class Client:
         presence_penalty: float = 0.0,
         stop_sequences: List[str] = None,
         return_likelihoods: str = None,
-        headers: dict = {}
+        headers: dict = {},
+        generate_config: dict = {}
     ) -> Generations:
         json_body = json.dumps({
             'task_type': "generate",
@@ -208,12 +209,13 @@ class Client:
             'frequency_penalty': frequency_penalty,
             'presence_penalty': presence_penalty,
             'stop_sequences': stop_sequences,
-            'return_likelihoods': return_likelihoods
+            'return_likelihoods': return_likelihoods,
+            'generate_config': generate_config
         }, ensure_ascii=False)
         response = self.__request(json_body, clueai.GENERATE_URL, model_name, headers=headers)
         generations: List[Generation] = []
         if "result" not in response:
-            raise ClueaiError(f'No result in response, please check or try. error{response.json()}')
+            raise ClueaiError(f'No result in response, please check or try. error{response}')
         for gen in response['result']:
             likelihood = None
             token_likelihoods = None

@@ -163,7 +163,7 @@ prompt= '''
   }
   prediction = cl.generate(
         model_name='clueai-base',
-        prompt=prompt)  # 如果需要自由调整参数自由采样生成，默认不采样。 添加额外参数信息设置方式：generate_config=generate_config
+        prompt=prompt)  # 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
 '''
 # 需要返回得分的话，指定return_likelihoods="GENERATION"
 prediction = cl.generate(

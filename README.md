@@ -263,6 +263,21 @@ prompt= '''
 '''
 # generate a prediction for a prompt 
 # 需要返回得分的话，指定return_likelihoods="GENERATION"
+# 如果需要自由调整参数自由采样生成， 可以参考：
+'''
+  generate_config = {
+    "do_sample": True,
+    "top_p": 0.8,
+    "max_length": 128,
+    "min_length": 10,
+    "length_penalty": 1.0,
+    "num_beams": 1
+  }
+  prediction = cl.generate(
+        model_name='clueai-base',
+        prompt=prompt,
+        generate_config=generate_config)
+'''
 prediction = cl.generate(
             model_name='clueai-base',
             prompt=prompt)

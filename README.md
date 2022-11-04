@@ -84,6 +84,116 @@ python setup.py install
   
   [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
 
+
+
+
+
+### 文本分类
+<table>
+<tr>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
+</tr>
+
+<tr>
+<td>
+
+```python
+import clueai
+from clueai.classify import Example
+cl = clueai.Client("", check_api_key=False)
+response = cl.classify(
+      model_name='clueai-base',
+      task_name='产品分类',
+      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+      labels = ["美颜", "二手", "外卖", "办公", "求职"])
+print('prediction: {}'.format(response.classifications))
+```
+</td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+    --header 'Content-Type: application/json' \
+    --header 'Model-name: clueai-base' \
+    --data '{
+       "task_type": "classify",
+       "task_name": "产品分类",
+       "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+       "labels": ["美颜", "二手", "外卖", "办公", "求职"]
+       }'
+
+```
+</td>
+
+</tr>
+</table>
+
+### 文本生成
+<table>
+<tr>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
+</tr>
+
+<tr>
+<td>
+
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+prompt= '''
+摘要：
+本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
+答案：
+'''
+# generate a prediction for a prompt 
+# 需要返回得分的话，指定return_likelihoods="GENERATION"
+# 如果需要自由调整参数自由采样生成， 可以参考：
+'''
+  generate_config = {
+    "do_sample": True,
+    "top_p": 0.8,
+    "max_length": 128,
+    "min_length": 10,
+    "length_penalty": 1.0,
+    "num_beams": 1
+  }
+  prediction = cl.generate(
+        model_name='clueai-base',
+        prompt=prompt,
+        generate_config=generate_config)
+'''
+prediction = cl.generate(
+            model_name='clueai-base',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+    --header 'Content-Type: application/json' \
+    --header 'Model-name: clueai-base' \
+    --data '{
+       "task_type": "generate",
+       "task_name": "摘要",
+       "input_data": ["摘要：\n本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人\n答案："]
+       }'
+
+```
+</td>
+
+</tr>
+</table>
+
+
 * 文本生成图像可以直接使用[绘画师](https://clueai.cn/clueai/t2i/) <a href="https://clueai.cn/clueai/t2i/" target="_blank"><img src="docs/imgs/painting.png" width="30px"></a>
   
 ### 文本生成图像
@@ -200,109 +310,6 @@ print('prediction: {}'.format(response.matches))
 </tr>
 </table>
 
-### 文本分类
-<table>
-<tr>
-<td> python 🔐 </td>
-<td> curl 🔐⚡⚡ </td>
-</tr>
-
-<tr>
-<td>
-
-```python
-import clueai
-from clueai.classify import Example
-cl = clueai.Client("", check_api_key=False)
-response = cl.classify(
-      model_name='clueai-base',
-      task_name='产品分类',
-      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
-      labels = ["美颜", "二手", "外卖", "办公", "求职"])
-print('prediction: {}'.format(response.classifications))
-```
-</td>
-<td>
-
-```python
-curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
-    --header 'Content-Type: application/json' \
-    --header 'Model-name: clueai-base' \
-    --data '{
-       "task_type": "classify",
-       "task_name": "产品分类",
-       "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
-       "labels": ["美颜", "二手", "外卖", "办公", "求职"]
-       }'
-
-```
-</td>
-
-</tr>
-</table>
-
-### 文本生成
-<table>
-<tr>
-<td> python 🔐 </td>
-<td> curl 🔐⚡⚡ </td>
-</tr>
-
-<tr>
-<td>
-
-```python
-import clueai
-
-# initialize the Clueai Client with an API Key
-cl = clueai.Client("", check_api_key=False)
-prompt= '''
-摘要：
-本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
-答案：
-'''
-# generate a prediction for a prompt 
-# 需要返回得分的话，指定return_likelihoods="GENERATION"
-# 如果需要自由调整参数自由采样生成， 可以参考：
-'''
-  generate_config = {
-    "do_sample": True,
-    "top_p": 0.8,
-    "max_length": 128,
-    "min_length": 10,
-    "length_penalty": 1.0,
-    "num_beams": 1
-  }
-  prediction = cl.generate(
-        model_name='clueai-base',
-        prompt=prompt,
-        generate_config=generate_config)
-'''
-prediction = cl.generate(
-            model_name='clueai-base',
-            prompt=prompt)
-            
-# print the predicted text          
-print('prediction: {}'.format(prediction.generations[0].text))
-```
-</td>
-<td>
-
-```python
-curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
-    --header 'Content-Type: application/json' \
-    --header 'Model-name: clueai-base' \
-    --data '{
-       "task_type": "generate",
-       "task_name": "摘要",
-       "input_data": ["摘要：\n本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人\n答案："]
-       }'
-
-```
-</td>
-
-</tr>
-</table>
 
 ### 示例输入
 #### 新闻分类(classify)

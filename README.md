@@ -88,7 +88,7 @@ python setup.py install
 
 
 
-### 文本分类
+### 文本理解
 <table>
 <tr>
 <td> python 🔐 </td>
@@ -152,7 +152,19 @@ prompt= '''
 '''
 # generate a prediction for a prompt 
 # 需要返回得分的话，指定return_likelihoods="GENERATION"
-# 如果需要自由调整参数自由采样生成， 可以参考：
+
+# 不需要传入参数调用方式：
+'''
+  prediction = cl.generate(
+        model_name='clueai-base',
+        prompt=prompt) 
+'''
+prediction = cl.generate(
+            model_name='clueai-base',
+            prompt=prompt)
+print('prediction: {}'.format(prediction.generations[0].text))
+
+# 如果需要自由调整参数自由采样生成， 可以参考（即添加generate_config参数信息）：
 '''
   generate_config = {
     "do_sample": True,
@@ -165,7 +177,7 @@ prompt= '''
   prediction = cl.generate(
         model_name='clueai-base',
         prompt=prompt,
-        generate_config=generate_config)
+        generate_config=generate_config) 
 '''
 prediction = cl.generate(
             model_name='clueai-base',

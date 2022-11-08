@@ -323,7 +323,6 @@ print('prediction: {}'.format(response.matches))
 ```python
 import clueai
 cl = clueai.Client("", check_api_key=False)
-res = cl.upload_finetune_corpus(test_file, "question", "answer")
 response = cl.upload_finetune_corpus(
       file_path="./examples/qa_test.json",
       input_field="question",
@@ -339,9 +338,8 @@ print("engine key: ", engine_key)
 ```python
 import clueai
 cl = clueai.Client("", check_api_key=False)
-res = cl.upload_finetune_corpus(test_file, "question", "answer")
 # engine_key 指定你训练模型的key
-response = clueai.start_finetune_model(
+response = cl.start_finetune_model(
         engine_key=engine_key)
 print(response)
 ```
@@ -371,7 +369,7 @@ generate_config = {
   }
 # 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
 prediction = cl.finetune_generate(
-        model_name='clueai-base',
+        engine_key=engine_key,
         prompt=prompt)
 # print the predicted text
 print('prediction: {}'.format(prediction.generations[0].text))

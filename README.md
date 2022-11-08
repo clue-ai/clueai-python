@@ -25,13 +25,13 @@
   - [免费试玩](#免费试玩)
   - [文本理解](#文本理解)
   - [文本生成](#文本生成)
+  - [微调模型](#微调模型)
+    - [上传库-启动-调用](#上传库-启动-调用)
   - [文本生成图像](#文本生成图像)
     - [图片生成示例输入](#图片生成示例输入)
     - [图片生成示例输出](#图片生成示例输出)
   - [构建引擎服务（推荐/问答/搜索）](#构建引擎服务推荐问答搜索)
     - [上传库-->调用](#上传库--调用)
-  - [微调模型](#微调模型)
-    - [上传库-启动-调用](#上传库-启动-调用)
   - [示例输入](#示例输入)
     - [新闻分类(classify)](#新闻分类classify)
     - [意图分类(classify)](#意图分类classify)
@@ -189,6 +189,80 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 </tr>
 </table>
 
+### 微调模型
+#### 上传库-启动-调用
+说明：
+1. 上传需要微调的数据，自动训练微调/部署模型，提供接口使用
+2. 上传的数据位json格式，参考./examples/finetune_train_examples.json
+3. 基于promptCLUE模型微调，建议参考prompt提示的格式构建数据集，效果会更好，prompt格式可以参考下面[示例输入](#示例输入)的形式
+
+<table>
+<tr>
+<td> 上传文件 🔐 </td>
+<td> 启动模型 🔐 </td>
+<td> 调用模型 🔐 </td>
+</tr>
+
+<tr>
+
+<td>
+
+```python
+import clueai
+cl = clueai.Client("", check_api_key=False)
+response = cl.upload_finetune_corpus(
+      file_path="./examples/finetune_train_examples.json",
+      input_field="input",
+      target_field="target"
+      )
+engine_key = response["engine_key"]
+print("engine key: ", engine_key)
+```
+</td>
+
+<td>
+
+```python
+import clueai
+cl = clueai.Client("", check_api_key=False)
+# engine_key 指定你训练模型的key
+response = cl.start_finetune_model(
+        engine_key=engine_key)
+print(response)
+```
+</td>
+
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+prompt= '''以下两句话的意思相同的吗？
+“花呗已经退还 可是我还没收到”，“我的花呗最迟还款是几号”。
+选项：是的，不是。
+答案：'''
+# generate a prediction for a prompt
+
+generate_config = {
+    "do_sample": True,
+    "top_p": 0.8,
+    "max_length": 128,
+    "min_length": 10,
+    "length_penalty": 1.0,
+    "num_beams": 1
+  }
+# 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
+prediction = cl.finetune_generate(
+        engine_key=engine_key,
+        prompt=prompt)
+# print the predicted text
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+</tr>
+</table>
 
 * 文本生成图像可以直接使用[绘画师](https://clueai.cn/clueai/t2i/) <a href="https://clueai.cn/clueai/t2i/" target="_blank"><img src="docs/imgs/painting.png" width="30px"></a>
   
@@ -305,80 +379,6 @@ print('prediction: {}'.format(response.matches))
 </td>
 </tr>
 </table>
-
-
-### 微调模型
-#### 上传库-启动-调用
-<table>
-<tr>
-<td> 上传文件 🔐 </td>
-<td> 启动模型 🔐 </td>
-<td> 调用模型 🔐 </td>
-</tr>
-
-<tr>
-
-<td>
-
-```python
-import clueai
-cl = clueai.Client("", check_api_key=False)
-response = cl.upload_finetune_corpus(
-      file_path="./examples/qa_test.json",
-      input_field="question",
-      target_field="answer"
-      )
-engine_key = response["engine_key"]
-print("engine key: ", engine_key)
-```
-</td>
-
-<td>
-
-```python
-import clueai
-cl = clueai.Client("", check_api_key=False)
-# engine_key 指定你训练模型的key
-response = cl.start_finetune_model(
-        engine_key=engine_key)
-print(response)
-```
-</td>
-
-<td>
-
-```python
-import clueai
-
-# initialize the Clueai Client with an API Key
-cl = clueai.Client("", check_api_key=False)
-prompt= '''
-摘要：
-本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
-答案：
-'''
-# generate a prediction for a prompt
-
-generate_config = {
-    "do_sample": True,
-    "top_p": 0.8,
-    "max_length": 128,
-    "min_length": 10,
-    "length_penalty": 1.0,
-    "num_beams": 1
-  }
-# 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
-prediction = cl.finetune_generate(
-        engine_key=engine_key,
-        prompt=prompt)
-# print the predicted text
-print('prediction: {}'.format(prediction.generations[0].text))
-```
-</td>
-</tr>
-</table>
-
-
 
 ### 示例输入
 #### 新闻分类(classify)

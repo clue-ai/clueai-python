@@ -152,8 +152,7 @@ prompt= '''
 '''
 # generate a prediction for a prompt 
 
-'''
-  generate_config = {
+generate_config = {
     "do_sample": True,
     "top_p": 0.8,
     "max_length": 128,
@@ -165,12 +164,8 @@ prompt= '''
   prediction = cl.generate(
         model_name='clueai-base',
         prompt=prompt) 
-'''
 # 需要返回得分的话，指定return_likelihoods="GENERATION"
-prediction = cl.generate(
-            model_name='clueai-base',
-            prompt=prompt)
-            
+         
 # print the predicted text          
 print('prediction: {}'.format(prediction.generations[0].text))
 ```

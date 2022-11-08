@@ -96,6 +96,107 @@ class Client:
                 headers=response.headers)
         return res
 
+    def upload_finetune_corpus(
+        self,
+        file_path: str,
+        input_field: str = "input",
+        target_field: str = "output",
+        headers: dict = {},
+        model_name: str = None,
+        sync: bool = True
+        ):
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+            'Model-name': model_name
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        data_json = {
+            "input_field": input_field,
+            "target_field": target_field
+        }
+        files = {'file': open(file_path,'rb')}
+        tmp_headers.update(headers)
+
+        is_sync = "sync/" if sync else ""
+        res = requests.post(f"{self.clueai_api_url}/finetune/upload/{is_sync}",
+            files=files, data=data_json, headers=headers)
+        return res.json()
+
+    def start_finetune_model(self,
+        engine_key: str,
+        headers: dict = {}):
+        json_body = {
+            'engine_key': engine_key,
+        }
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        tmp_headers.update(headers)
+
+        finished_train_res = requests.post(f"{self.clueai_api_url}/finetune/finished/", json=json_body, headers=headers)
+        finished_train_res = finished_train_res.json()
+        if "finished" not in finished_train_res or finished_train_res["finished"] != True:
+            return (f"还未完成训练，请稍后：{finished_train_res}")
+        else:
+            print("已经训练完成, 正在启动中, 预计需要等待20s...")
+
+        res = requests.post(f"{self.clueai_api_url}/finetune/start/", json=json_body, headers=headers)
+        res_dict = res.json()
+
+        return "启动成功" if res_dict["start"] else "启动失败"
+
+    def finetune_generate(
+        self,
+        engine_key: str,
+        prompt: str,
+        model_name: str = None,
+        return_likelihoods: str = None,
+        headers: dict = {},
+        generate_config: dict = {}
+    ) -> Generations:
+        json_body = {
+            'engine_key': engine_key,
+            'task_type': "generate",
+            'model_name': model_name,
+            'input_data': [prompt],
+            'return_likelihoods': return_likelihoods,
+            'generate_config': generate_config
+        }
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+            'Model-name': model_name
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        tmp_headers.update(headers)
+        response = requests.post(f"{self.clueai_api_url}/finetune/predict/", json=json_body, headers=headers)
+        response = response.json()
+        generations: List[Generation] = []
+        if "result" not in response:
+            raise ClueaiError(f'No result in response, please check or try. error{response}')
+        for gen in response['result']:
+            likelihood = None
+            token_likelihoods = None
+            if return_likelihoods == 'GENERATION' or return_likelihoods == 'ALL':
+                likelihood = gen['likelihood']
+            if 'token_likelihoods' in gen.keys():
+                token_likelihoods = []
+                for index, likelihoods in gen['token_likelihoods'].items():
+                    token_likelihoods.append(
+                        TokenLikelihood(likelihoods['token'], likelihoods["prob"]))
+            generations.append(Generation(prompt,
+                gen['generate_text'], likelihood, token_likelihoods))
+        return Generations(generations, return_likelihoods)
+
     def upload_corpus(
         self,
         file_path: str,
@@ -122,7 +223,7 @@ class Client:
         res = requests.post(f"{self.clueai_api_url}/search/upload/{is_sync}",
             files=files, data=data_json, headers=headers)
         return res.json()
-    
+
     def search(
         self, 
         query: str,

@@ -343,7 +343,7 @@ res = cl.upload_finetune_corpus(test_file, "question", "answer")
 # engine_key 指定你训练模型的key
 response = clueai.start_finetune_model(
         engine_key=engine_key)
-print(respnse)
+print(response)
 ```
 </td>
 

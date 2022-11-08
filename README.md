@@ -23,13 +23,15 @@
   - [安装](#安装)
 - [快速开始](#快速开始)
   - [免费试玩](#免费试玩)
+  - [文本理解](#文本理解)
+  - [文本生成](#文本生成)
   - [文本生成图像](#文本生成图像)
     - [图片生成示例输入](#图片生成示例输入)
     - [图片生成示例输出](#图片生成示例输出)
   - [构建引擎服务（推荐/问答/搜索）](#构建引擎服务推荐问答搜索)
     - [上传库-->调用](#上传库--调用)
-  - [文本分类](#文本分类)
-  - [文本生成](#文本生成)
+  - [微调模型](#微调模型)
+    - [上传库-启动-调用](#上传库-启动-调用)
   - [示例输入](#示例输入)
     - [新闻分类(classify)](#新闻分类classify)
     - [意图分类(classify)](#意图分类classify)
@@ -50,7 +52,7 @@
     - [关键词抽取(generate)](#关键词抽取generate)
     - [情感倾向(classify)](#情感倾向classify)
   - [更大模型更好效果](#更大模型更好效果)
-    - [文本分类](#文本分类-1)
+    - [文本分类](#文本分类)
     - [文本生成](#文本生成-1)
 - [模型介绍](#模型介绍)
 - [返回结果](#返回结果)
@@ -139,7 +141,6 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 <tr>
 <td>
 
-
 ```python
 import clueai
 
@@ -160,8 +161,8 @@ generate_config = {
     "length_penalty": 1.0,
     "num_beams": 1
   }
-  # 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
-  prediction = cl.generate(
+# 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
+prediction = cl.generate(
         model_name='clueai-base',
         prompt=prompt) 
 # 需要返回得分的话，指定return_likelihoods="GENERATION"
@@ -304,6 +305,81 @@ print('prediction: {}'.format(response.matches))
 </td>
 </tr>
 </table>
+
+
+### 微调模型
+#### 上传库-启动-调用
+<table>
+<tr>
+<td> 上传文件 🔐 </td>
+<td> 启动模型 🔐 </td>
+<td> 调用模型 🔐 </td>
+</tr>
+
+<tr>
+
+<td>
+
+```python
+import clueai
+cl = clueai.Client("", check_api_key=False)
+res = cl.upload_finetune_corpus(test_file, "question", "answer")
+response = cl.upload_finetune_corpus(
+      file_path="./examples/qa_test.json",
+      input_field="question",
+      target_field="answer"
+      )
+engine_key = response["engine_key"]
+print("engine key: ", engine_key)
+```
+</td>
+
+<td>
+
+```python
+import clueai
+cl = clueai.Client("", check_api_key=False)
+res = cl.upload_finetune_corpus(test_file, "question", "answer")
+# engine_key 指定你训练模型的key
+response = clueai.start_finetune_model(
+        engine_key=engine_key)
+print(respnse)
+```
+</td>
+
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+prompt= '''
+摘要：
+本文总结了十个可穿戴产品的设计原则，而这些原则，同样也是笔者认为是这个行业最吸引人的地方：1.为人们解决重复性问题；2.从人开始，而不是从机器开始；3.要引起注意，但不要刻意；4.提升用户能力，而不是取代人
+答案：
+'''
+# generate a prediction for a prompt
+
+generate_config = {
+    "do_sample": True,
+    "top_p": 0.8,
+    "max_length": 128,
+    "min_length": 10,
+    "length_penalty": 1.0,
+    "num_beams": 1
+  }
+# 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
+prediction = cl.finetune_generate(
+        model_name='clueai-base',
+        prompt=prompt)
+# print the predicted text
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+</tr>
+</table>
+
 
 
 ### 示例输入

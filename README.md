@@ -58,7 +58,7 @@
 - [返回结果](#返回结果)
 - [问题反馈和技术交流](#问题反馈和技术交流)
 
-#### 更新 Update 2022-10-07(新)
+#### 更新 Update 2022-10-09(新)
 新增模型微调功能：[模型微调](#模型微调) [上传库-启动-调用](#上传库-启动-调用)
 #### 更新 Update 2022-09-29
 PromptCLUE: 中文多任务Prompt预训练模型，已经开源！<a href='https://github.com/clue-ai/PromptCLUE'>github项目地址</a> | <a href='https://huggingface.co/ClueAI/PromptCLUE'>模型下载</a>

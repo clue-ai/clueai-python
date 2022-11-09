@@ -212,15 +212,21 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 <td>
 
 ```python
+# 上传少量微调数据，指定输入和输出字段， input_field和target_field分别指你需要微调的输入和输出字段
 import clueai
+api_key=""
 cl = clueai.Client(api_key)
 response = cl.upload_finetune_corpus(
-      file_path="./examples/finetune_train_examples.json",
+      file_path="finetune_train_examples.json",
       input_field="input",
       target_field="target"
       )
-engine_key = response["engine_key"]
-print("engine key: ", engine_key)
+
+if "engine_key" in response:
+  engine_key = response["engine_key"]
+  print("engine key: ", engine_key)
+else:
+  print(response)
 ```
 </td>
 

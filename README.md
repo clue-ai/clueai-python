@@ -200,6 +200,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 4. 需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，方法： 点击[官网](https://www.clueai.cn/)右上角立即使用-注册登陆后-右上角有创建apikey-创建apikey
 5. 微调数据数量限制1w条，超过会被采样，如果需要微调更大数量请与我们联系，联系方式见最下方
 6. 完整代码可参考：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)
+7. 默认启动模型推理服务后，会保持10分钟，超时会断开
 <table>
 <tr>
 <td> 上传文件 🔐 </td>

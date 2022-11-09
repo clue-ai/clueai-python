@@ -105,6 +105,16 @@ class Client:
         model_name: str = None,
         sync: bool = True
         ):
+        try:
+            res = self.check_api_key()
+            if not res['valid']:
+                raise ClueaiError('invalid api key')
+        except ClueaiError as e:
+            raise ClueaiError(
+                message=e.message,
+                http_status=e.http_status,
+                headers=e.headers)
+
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Content-Type': 'application/json',
@@ -131,6 +141,16 @@ class Client:
         json_body = {
             'engine_key': engine_key,
         }
+        try:
+            res = self.check_api_key()
+            if not res['valid']:
+                raise ClueaiError('invalid api key')
+        except ClueaiError as e:
+            raise ClueaiError(
+                message=e.message,
+                http_status=e.http_status,
+                headers=e.headers)
+
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Content-Type': 'application/json',
@@ -161,6 +181,16 @@ class Client:
         headers: dict = {},
         generate_config: dict = {}
     ) -> Generations:
+        try:
+            res = self.check_api_key()
+            if not res['valid']:
+                raise ClueaiError('invalid api key')
+        except ClueaiError as e:
+            raise ClueaiError(
+                message=e.message,
+                http_status=e.http_status,
+                headers=e.headers)
+                
         json_body = {
             'engine_key': engine_key,
             'task_type': "generate",

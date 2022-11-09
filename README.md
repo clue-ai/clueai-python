@@ -195,7 +195,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 1. 上传需要微调的数据，自动训练微调/部署模型，提供接口使用
 2. 上传的数据位json格式，参考./examples/finetune_train_examples.json
 3. 基于promptCLUE模型微调，建议参考prompt提示的格式构建数据集，效果会更好，prompt格式可以参考下面[示例输入](#示例输入)的形式
-
+4. 需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，方法： 点击[官网](https://www.clueai.cn/)右上角立即使用-注册登陆后-右上角有创建apikey-创建apikey
 <table>
 <tr>
 <td> 上传文件 🔐 </td>
@@ -209,7 +209,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 ```python
 import clueai
-cl = clueai.Client("", check_api_key=False)
+cl = clueai.Client(api_key)
 response = cl.upload_finetune_corpus(
       file_path="./examples/finetune_train_examples.json",
       input_field="input",
@@ -224,7 +224,7 @@ print("engine key: ", engine_key)
 
 ```python
 import clueai
-cl = clueai.Client("", check_api_key=False)
+cl = clueai.Client(api_key)
 # engine_key 指定你训练模型的key
 response = cl.start_finetune_model(
         engine_key=engine_key)
@@ -238,7 +238,7 @@ print(response)
 import clueai
 
 # initialize the Clueai Client with an API Key
-cl = clueai.Client("", check_api_key=False)
+cl = clueai.Client(api_key)
 prompt= '''以下两句话的意思相同的吗？
 “花呗已经退还 可是我还没收到”，“我的花呗最迟还款是几号”。
 选项：是的，不是。

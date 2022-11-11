@@ -93,6 +93,30 @@ python setup.py install
 
 
 
+### 效果对比--16类中文任务
+
+|  任务类型  | PromptCLUE-base  | PromptCLUE-large    | 
+| :----:| :----: | :----: | 
+|  **分数** Score  | 63.47  | 70.55(+7.08)   | 
+|   参数 Parameters  | 220M |  770M   |  
+| **理解任务**（acc，10类） |  | | 
+| 分类 classify | 89.56 | 92.89| 
+| 情感分析 emotion_analysis | 80.55 | 85.64 | 
+| 相似度计算 similar | 70.94 | 78.47 | 
+| 自然语言推理 nli | 78.00 | 86.67 | 
+| 指代消解 anaphora_resolution | 30.00 | 64.00| 
+| 阅读理解 reading_comprehension | 71.69 | 84.78 | 
+| 关键词提取 keywords_extraction | 41.44 | 47.78 | 
+| 信息抽取 ner | 63.02 | 70.09 | 
+| 知识图谱问答 knowledge_graph  | - | 53.11 |
+| 中心词提取 Keyword_extraction | 66.50 |71.50 |  
+| **生成任务**（rouge，6类） |  |   | 
+| 翻译（英中、中英） nmt | 55.92 | 59.67 | 
+| 摘要 summary | 31.71 | 34.48| 
+| 问答 qa | 21.18 | 27.05 | 
+| 生成（文章、问题生成） | 35.86 | 39.87 | 
+| 改写 paraphrase | - | 57.68  | 
+| 纠错 correct | - | 93.35  | 
 
 
 ### 文本理解

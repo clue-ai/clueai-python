@@ -161,47 +161,6 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 </table>
 
 
-### 文本理解
-<table>
-<tr>
-<td> python 🔐 </td>
-<td> curl 🔐⚡⚡ </td>
-</tr>
-
-<tr>
-<td>
-
-```python
-import clueai
-from clueai.classify import Example
-cl = clueai.Client("", check_api_key=False)
-response = cl.classify(
-      model_name='clueai-base',
-      task_name='产品分类',
-      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
-      labels = ["美颜", "二手", "外卖", "办公", "求职"])
-print('prediction: {}'.format(response.classifications))
-```
-</td>
-<td>
-
-```python
-curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
-    --header 'Content-Type: application/json' \
-    --header 'Model-name: clueai-base' \
-    --data '{
-       "task_type": "classify",
-       "task_name": "产品分类",
-       "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
-       "labels": ["美颜", "二手", "外卖", "办公", "求职"]
-       }'
-
-```
-</td>
-
-</tr>
-</table>
-
 ### 信息抽取(NER)
 <table>
 <tr>

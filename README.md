@@ -17,6 +17,9 @@
 <a href="https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9"> <img src="https://colab.research.google.com/assets/colab-badge.svg"></a>
 </p>
 
+ <img src="docs/imgs/clueai_all.png" /> 
+
+
 *Read this in other languages: [English](docs/README_en.md)
 
 - [Python 软件包](#python-软件包)

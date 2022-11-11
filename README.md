@@ -160,6 +160,96 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 </tr>
 </table>
 
+
+### 文本理解
+<table>
+<tr>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
+</tr>
+
+<tr>
+<td>
+
+```python
+import clueai
+from clueai.classify import Example
+cl = clueai.Client("", check_api_key=False)
+response = cl.classify(
+      model_name='clueai-base',
+      task_name='产品分类',
+      inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+      labels = ["美颜", "二手", "外卖", "办公", "求职"])
+print('prediction: {}'.format(response.classifications))
+```
+</td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+    --header 'Content-Type: application/json' \
+    --header 'Model-name: clueai-base' \
+    --data '{
+       "task_type": "classify",
+       "task_name": "产品分类",
+       "input_data": ["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
+       "labels": ["美颜", "二手", "外卖", "办公", "求职"]
+       }'
+
+```
+</td>
+
+</tr>
+</table>
+
+### 信息抽取(NER)
+<table>
+<tr>
+<td> python 🔐 </td>
+<td> curl 🔐⚡⚡ </td>
+</tr>
+
+<tr>
+<td>
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("", check_api_key=False)
+prompt= '''
+信息抽取：
+据新华社电广东省清远市清城区政府昨日对外发布信息称,日前被实名举报涉嫌勒索企业、说“分分钟可以搞垮一间厂”的清城区环保局局长陈柏,已被免去清城区区委委员
+问题：机构名，人名，职位
+答案：
+'''
+prediction = cl.generate(
+        model_name='clueai-base',
+        prompt=prompt) 
+# 需要返回得分的话，指定return_likelihoods="GENERATION"
+         
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+</td>
+<td>
+
+```python
+curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api' \
+    --header 'Content-Type: application/json' \
+    --header 'Model-name: clueai-base' \
+    --data '{
+       "task_type": "generate",
+       "task_name": "信息抽取",
+       "input_data": ["信息抽取：\n据新华社电广东省清远市清城区政府昨日对外发布信息称,日前被实名举报涉嫌勒索企业、说“分分钟可以搞垮一间厂”的清城区环保局局长陈柏,已被免去清城区区委委员\n问题：机构名，人名，职位\n答案："]
+       }'
+
+```
+</td>
+
+</tr>
+</table>
+
 ### 文本生成
 <table>
 <tr>

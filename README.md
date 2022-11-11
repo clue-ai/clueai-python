@@ -19,6 +19,7 @@
 
  <img src="docs/imgs/clueai_all.png" /> 
 
+ <img src="docs/imgs/clueai_demo.gif" /> 
 
 *Read this in other languages: [English](docs/README_en.md)
 

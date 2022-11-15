@@ -384,6 +384,8 @@ class Client:
             'labels': labels
         }, ensure_ascii=False)
         response = self.__request(json_body, clueai.CLASSIFY_URL, model_name)
+        if "result" not in response:
+            raise ClueaiError(f'No result in response, please check or try. error{response}')
         classifications = []
         for res in response['result']:
             confidenceObj = []

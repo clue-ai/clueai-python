@@ -96,6 +96,33 @@ class Client:
                 headers=response.headers)
         return res
 
+    def check_usage(
+            self,
+            headers: dict = {},
+        ):
+        try:
+            res = self.check_api_key()
+            if not res['valid']:
+                raise ClueaiError('invalid api key')
+        except ClueaiError as e:
+            raise ClueaiError(
+                message=e.message,
+                http_status=e.http_status,
+                headers=e.headers)
+
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+
+        res = requests.get(f"{self.clueai_api_url}/serving/api/user_info?api_key={self.api_key}", 
+            headers=tmp_headers)
+
+        return res.json()
+
     def upload_finetune_corpus(
         self,
         file_path: str,

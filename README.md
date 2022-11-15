@@ -28,7 +28,7 @@
 - [快速开始](#快速开始)
   - [免费试玩](#免费试玩)
   - [文本理解](#文本理解)
-  - [信息抽取ner](#信息抽取ner)
+  - [信息抽取(NER)](#信息抽取ner)
   - [文本生成](#文本生成)
   - [模型微调](#模型微调)
     - [上传库-启动-调用](#上传库-启动-调用)
@@ -41,6 +41,7 @@
   - [更大模型更好效果](#更大模型更好效果)
     - [文本分类](#文本分类)
     - [文本生成](#文本生成-1)
+- [查看调用使用量](#查看调用使用量)
 - [模型介绍](#模型介绍)
 - [返回结果](#返回结果)
 - [问题反馈和技术交流](#问题反馈和技术交流)
@@ -77,7 +78,7 @@ python setup.py install
 
 
 
-### 效果对比--16类中文任务
+效果对比--16类中文任务
 
 |  任务类型  | PromptCLUE-base  | PromptCLUE-large    | 
 | :----:| :----: | :----: | 
@@ -453,7 +454,7 @@ print('prediction: {}'.format(response.matches))
 </table>
 
 ### 示例输入
-#### 新闻分类(classify)
+新闻分类(classify)
 ```bash
 Input:
 新闻分类：
@@ -465,7 +466,7 @@ Model output:
 国际
 ```
 
-#### 意图分类(classify)
+意图分类(classify)
 ```bash
 Input:
 意图分类：
@@ -477,7 +478,7 @@ Model output:
 酒店
 ```
 
-#### 情感分析(classify)
+情感分析(classify)
 ```bash
 Input:
 情感分析：
@@ -489,7 +490,7 @@ Model output:
 消极
 ```
 
-#### 推理(generate)
+推理(generate)
 ```bash
 Input:
 推理关系判断：
@@ -502,7 +503,7 @@ Model output:
 矛盾
 ```
 
-#### 阅读理解(generate)
+阅读理解(generate)
 ```bash
 Input:
 阅读理解：
@@ -516,7 +517,7 @@ Input:
 Model output:
 联邦政府应对猴痘疫情行动迟缓,分发试剂和疫苗的工作出现延误,影响了遏制疫情传播的能力
 ```
-#### 阅读理解-自由式(generate)
+阅读理解-自由式(generate)
 ```bash
 Input:
 阅读以下对话并回答问题。
@@ -529,7 +530,7 @@ Model output:
 感冒了
 ```
 
-#### 摘要(generate)
+摘要(generate)
 ```bash
 Input:
 为下面的文章生成摘要：
@@ -540,7 +541,7 @@ Model output:
 四川甘孜州泸定县发生6.8级地震
 ```
 
-#### 翻译-中英(generate)
+翻译-中英(generate)
 ```bash
 Input:
 翻译成英文：
@@ -551,7 +552,7 @@ Model output:
 The Speaker went to Taiwan, and the Chinese people were angry.
 ```
 
-#### 翻译-英中(generate)
+翻译-英中(generate)
 ```bash
 Input:
 翻译成中文：
@@ -561,7 +562,7 @@ This is a dialogue robot that can talk to people.
 Model output:
 这是一个能与人对话的机器人。
 ```
-#### 通用信息抽取(generate)
+通用信息抽取(generate)
 ```bash
 Input:
 信息抽取：
@@ -575,7 +576,7 @@ Model output:
 职位:局长
 ```
 
-#### 简历信息抽取(generate)
+简历信息抽取(generate)
 ```bash
 Input:
 阅读文本抽取关键信息：
@@ -591,7 +592,7 @@ Model output:
 学历:博士学历```
 ```
 
-#### 医疗信息抽取(generate)
+医疗信息抽取(generate)
 ```bash
 Input:
 找出指定的信息：
@@ -603,7 +604,7 @@ Model output:
 症状:胃不舒服,麻木,浑身不舒服,胃炎
 ```
 
-#### 电商客户需求分析(classify)
+电商客户需求分析(classify)
 ```bash
 Input:
 电商客户诉求分类：
@@ -615,7 +616,7 @@ Model output:
 买家咨询退换货规则
 ```
 
-#### 医疗语义相似度(classify)
+医疗语义相似度(classify)
 ```bash
 Input:
 下面句子是否表示了相同的语义：
@@ -628,7 +629,7 @@ Model output:
 不相似
 ```
 
-#### 问题生成(generate)
+问题生成(generate)
 ```bash
 Input:
 问题生成：
@@ -639,7 +640,7 @@ Model output:
 1、今年1-8月,中国实际使用外资增长了多少? 2、欧盟对华投资增长了多少? 
 ```
 
-#### 指代消解(generate)
+指代消解(generate)
 ```bash
 Input:
 代词指向哪个名词短语：
@@ -652,7 +653,7 @@ Model output:
 特拉斯 
 ```
 
-#### 关键词抽取(generate)
+关键词抽取(generate)
 ```bash
 Input:
  抽取关键词：
@@ -664,7 +665,7 @@ Model output:
 ```
 
 
-#### 情感倾向(classify)
+情感倾向(classify)
 ```bash
 文字中包含了怎样的情感：
 超可爱的帅哥，爱了。。。
@@ -675,7 +676,7 @@ Model output::
 喜欢
 ```
 
-#### 文章生成(generate)
+文章生成(generate)
 ```bash
 Input:
 根据标题生成文章：
@@ -686,7 +687,7 @@ Model output:
 新华网莫斯科6月12日电(记者贺颖骏)俄罗斯紧急情况部新闻处12日证实，俄罗斯南部特罗伊茨克州的一条天然气管道12日发生泄漏爆炸，目前已造成至少20人死亡。“据俄紧急情况部新闻局发表的声明，管道是俄罗斯特罗伊茨克斯天然气工业公司运营的一部分。管道的一处出口受到影响，天然气被泄漏的气体引燃。“声明没有说明天然气管道发生爆炸的原因。“目前，当地消防部门正在全力灭火。
 ```
 
-#### 中心词提取(generate)
+中心词提取(generate)
 ```bash
 中心词提取：
 现在有京东国际太方便了，可以安全的买到正经的电子设备，游戏机完全没问题，发货非常快，第二天就到
@@ -696,7 +697,7 @@ Model output:
 京东国际
 ```
 
-#### 改写(generate)
+改写(generate)
 ```bash
 生成与下列文字相同意思的句子：
 长期通胀前景在今天可能不确定性更大。
@@ -706,7 +707,7 @@ Model output:
 如今，长期通胀前景不确定性可能更大。
 ```
 
-#### 纠错(generate)
+纠错(generate)
 ```bash
 文本纠错：
 你必须服从命令，不要的考虑。你的思想被别人手下来。
@@ -716,7 +717,7 @@ Model output:
 你必须服从命令，不要考虑。你的思想被别人打下来。
 ```
 
-#### 问答(generate)
+问答(generate)
 ```bash
 问答：
 问题：阿里巴巴的总部在哪里：
@@ -728,7 +729,7 @@ Model output:
 
 ### 更大模型更好效果
 
-在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例
+在用更大模型之前，你需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，下面是有关分类和生成任务的一个基本的示例, 可以通过接口查看调用使用量
 
 #### 文本分类
 <table>
@@ -745,13 +746,14 @@ import clueai
 from clueai.classify import Example
 # initialize the Clueai Client with an API Key
 cl = clueai.Client('YOUR_API_KEY')
+# 如果查看api_key的使用量可以通过 print(cl.check_usage())
 response = cl.classify(
   model_name='clueai-large',
   task_name='情感分析',
   task_name='产品分类',
   inputs=["强大图片处理器，展现自然美丽的你,,修复部分小错误，提升整体稳定性。", "求闲置买卖，精品购物，上畅易无忧闲置商城，安全可信，优质商品有保障"],
   labels = ["美颜", "二手", "外卖", "办公", "求职"])
-  
+
 print('prediction: {}'.format(response.classifications))
 ```
 </td>
@@ -821,6 +823,16 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 </tr>
 </table>
+
+## 查看调用使用量
+
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client('YOUR_API_KEY')
+print(cl.check_usage()) 
+```
 
 ## 模型介绍
 

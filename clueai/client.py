@@ -159,7 +159,7 @@ class Client:
 
         is_sync = "sync/" if sync else ""
         res = requests.post(f"{self.clueai_api_url}/finetune/upload/{is_sync}",
-            files=files, data=data_json, headers=headers)
+            files=files, data=data_json, headers=tmp_headers)
         return res.json()
 
     def start_finetune_model(self,
@@ -187,14 +187,14 @@ class Client:
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
 
-        finished_train_res = requests.post(f"{self.clueai_api_url}/finetune/finished/", json=json_body, headers=headers)
+        finished_train_res = requests.post(f"{self.clueai_api_url}/finetune/finished/", json=json_body, headers=tmp_headers)
         finished_train_res = finished_train_res.json()
         if "finished" not in finished_train_res or finished_train_res["finished"] != True:
             return (f"还未完成训练，请稍后：{finished_train_res}")
         else:
             print("已经训练完成, 正在启动中, 预计需要等待20s...")
 
-        res = requests.post(f"{self.clueai_api_url}/finetune/start/", json=json_body, headers=headers)
+        res = requests.post(f"{self.clueai_api_url}/finetune/start/", json=json_body, headers=tmp_headers)
         res_dict = res.json()
 
         return "启动成功" if res_dict["start"] else "启动失败"
@@ -235,7 +235,7 @@ class Client:
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
-        response = requests.post(f"{self.clueai_api_url}/finetune/predict/", json=json_body, headers=headers)
+        response = requests.post(f"{self.clueai_api_url}/finetune/predict/", json=json_body, headers=tmp_headers)
         response = response.json()
         generations: List[Generation] = []
         if "result" not in response:
@@ -278,7 +278,7 @@ class Client:
 
         is_sync = "sync/" if sync else ""
         res = requests.post(f"{self.clueai_api_url}/search/upload/{is_sync}",
-            files=files, data=data_json, headers=headers)
+            files=files, data=data_json, headers=tmp_headers)
         return res.json()
 
     def search(

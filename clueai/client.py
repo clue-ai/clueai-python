@@ -148,7 +148,6 @@ class Client:
 
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
-            'Content-Type': 'application/json',
             'Request-Source': 'python-sdk',
             'Model-name': model_name
         }
@@ -269,7 +268,6 @@ class Client:
         ):
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
-            'Content-Type': 'application/json',
             'Request-Source': 'python-sdk',
             'Model-name': model_name
         }

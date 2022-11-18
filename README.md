@@ -830,8 +830,9 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 import clueai
 
 # initialize the Clueai Client with an API Key
+# 微调用户finetune_user=True
 cl = clueai.Client('YOUR_API_KEY')
-print(cl.check_usage()) 
+print(cl.check_usage(finetune_user=False)) 
 ```
 
 ## 模型介绍

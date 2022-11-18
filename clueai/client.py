@@ -221,7 +221,8 @@ class Client:
                 message=e.message,
                 http_status=e.http_status,
                 headers=e.headers)
-                
+        if len(prompt) > 1024:
+            prompt = prompt[:1024]
         json_body = {
             'engine_key': engine_key,
             'task_type': "generate",
@@ -359,6 +360,8 @@ class Client:
         headers: dict = {},
         generate_config: dict = {}
     ) -> Generations:
+        if len(prompt) > 1024:
+            prompt = prompt[:1024]
         json_body = json.dumps({
             'task_type': "generate",
             'model_name': model_name,

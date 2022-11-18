@@ -98,6 +98,7 @@ class Client:
 
     def check_usage(
             self,
+            finetune_user: bool=False,
             headers: dict = {},
         ):
         try:
@@ -117,8 +118,11 @@ class Client:
         }
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
-
-        res = requests.get(f"{self.clueai_api_url}/serving/api/user_info?api_key={self.api_key}", 
+        if finetune_user:
+            res = requests.get(f"{self.clueai_api_url}/serving/finetune_api/user_info?api_key={self.api_key}",
+            headers=tmp_headers)
+        else:
+            res = requests.get(f"{self.clueai_api_url}/serving/api/user_info?api_key={self.api_key}",
             headers=tmp_headers)
 
         return res.json()

@@ -50,6 +50,7 @@ class Client:
         self.clueai_api_url = clueai.CLUEAI_API_URL
         self.num_workers = num_workers
         self.request_dict = request_dict
+        self.timeout = clueai.TIMEOUT
         if version is None:
             self.modelfun_version = clueai.MODELFUN_VERSION
         else:
@@ -197,7 +198,7 @@ class Client:
         else:
             print("已经训练完成, 正在启动中, 预计需要等待20s...")
 
-        res = requests.post(f"{self.clueai_api_url}/finetune/start/", json=json_body, headers=tmp_headers)
+        res = requests.post(f"{self.clueai_api_url}/finetune/start/", json=json_body, headers=tmp_headers, timeout=self.timeout)
         res_dict = res.json()
 
         return "启动成功" if res_dict["start"] else "启动失败"
@@ -239,7 +240,7 @@ class Client:
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
-        response = requests.post(f"{self.clueai_api_url}/finetune/predict/", json=json_body, headers=tmp_headers)
+        response = requests.post(f"{self.clueai_api_url}/finetune/predict/", json=json_body, headers=tmp_headers, timeout=self.timeout)
         response = response.json()
         generations: List[Generation] = []
         if "result" not in response:

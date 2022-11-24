@@ -10,3 +10,4 @@ CLASSIFY_URL = 'serving_api'
 EXTRACT_URL = 'extract'
 CHECK_API_KEY_URL = 'check_api_key'
 TOKENIZE_URL = 'tokenize'
+TIMEOUT = 200

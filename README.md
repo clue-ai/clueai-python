@@ -47,7 +47,9 @@
 - [返回结果](#返回结果)
 - [问题反馈和技术交流](#问题反馈和技术交流)
 
-#### 更新 Update 2022-11-09(新)
+### 更新 Update 2022-11-25(新)
+新增智能文档问答生成：  [智能文档问答生成](#智能文档问答生成)
+#### 更新 Update 2022-11-09
 新增模型微调功能：[模型微调](#模型微调) [上传库-启动-调用](#上传库-启动-调用)
 #### 更新 Update 2022-09-29
 PromptCLUE: 中文多任务Prompt预训练模型，已经开源！<a href='https://github.com/clue-ai/PromptCLUE'>github项目地址</a> | <a href='https://huggingface.co/ClueAI/PromptCLUE'>模型下载</a>
@@ -124,9 +126,7 @@ cl = clueai.Client('YOUR_API_KEY')
 doc='''本周早些时候，始于俄罗斯的两条巨型天然气管道分别发现了三个泄漏点。管道中充满燃料，破裂产生了宽度达800米的气泡，上浮到丹麦博恩霍尔姆岛附近的波罗的海表面。
 就在泄漏发生前，附近检测到了爆炸，而欧洲各国尚未确定被称为北溪一号和北溪二号管道泄漏的原因。欧洲和美国的领导人表示，这是一起蓄意破坏行为。
 相关猜测指向俄罗斯，该国的国有能源公司俄罗斯天然气工业股份公司是这些管道的主要所有者。俄罗斯发言人德米特里·佩斯科夫驳斥了有关俄罗斯参与的指控，称其“愚蠢”，并将矛头指向美国。'''
-predictions = cl.doc_qa_generate(doc=doc, 
-      model_name='clueai-large'
-      )
+predictions = cl.doc_qa_generate(model_name='clueai-large', doc=doc)
 print("prediction: ", predictions)
 ```
 </td>

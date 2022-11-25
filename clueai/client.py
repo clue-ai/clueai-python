@@ -16,6 +16,7 @@ from clueai.embeddings import Embeddings
 from clueai.error import ClueaiError
 from clueai.generation import Generations, Generation, TokenLikelihood
 from clueai.match import Match, Matches, Score
+from clueai.qa import QAs, QA, QAPair
 from clueai.tokenize import Tokens
 from clueai.classify import Classifications, Classification, Example as ClassifyExample, Confidence
 from clueai.extract import Entity, Example as ExtractExample, Extraction, Extractions
@@ -317,6 +318,46 @@ class Client:
 
         return Matches([match_instance])
 
+    def doc_qa_generate(
+        self, 
+        doc: str,
+        headers: dict = {},
+        model_name: str = None
+        ):
+        try:
+            res = self.check_api_key()
+            if not res['valid']:
+                raise ClueaiError('invalid api key')
+        except ClueaiError as e:
+            raise ClueaiError(
+                message=e.message,
+                http_status=e.http_status,
+                headers=e.headers)
+                
+        tmp_headers = {
+            'Api-Key': 'BEARER {}'.format(self.api_key),
+            'Content-Type': 'application/json',
+            'Request-Source': 'python-sdk',
+            'Model-name': model_name
+        }
+        if self.modelfun_version != '':
+            tmp_headers['clueai-Version'] = self.modelfun_version
+        tmp_headers.update(headers)
+        response = requests.get(f"{self.clueai_api_url}/doc_auto_qa/?doc={doc}",
+            headers=tmp_headers)
+        response = response.json()
+        if "result" not in response:
+            raise ClueaiError(f'No result in response, please check or try. error{response}')
+
+        result =  response['result']
+        qa_pairs = []
+        for q, a in result['qa_pairs'].items():
+            qa_pairs.append(QAPair(q, a))
+
+        qa_instance = QA(doc, qa_pairs)
+
+        return QAs([qa_instance])
+        
     def text2image(
         self,
         prompt: str,

@@ -322,6 +322,7 @@ class Client:
         self, 
         doc: str,
         headers: dict = {},
+        generate_config: dict={},
         model_name: str = None
         ):
         try:
@@ -333,7 +334,11 @@ class Client:
                 message=e.message,
                 http_status=e.http_status,
                 headers=e.headers)
-                
+        json_data = {
+            "model_name": model_name,
+            "input_data": [doc],
+            "generate_config": generate_config
+        }
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Content-Type': 'application/json',
@@ -343,7 +348,7 @@ class Client:
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
-        response = requests.get(f"{self.clueai_api_url}/doc_auto_qa/?doc={doc}",
+        response = requests.post(f"{self.clueai_api_url}/doc_auto_qa/", json=json_data,
             headers=tmp_headers)
         response = response.json()
         if "result" not in response:

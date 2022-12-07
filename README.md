@@ -42,6 +42,7 @@
   - [更大模型更好效果](#更大模型更好效果)
     - [文本分类](#文本分类)
     - [文本生成](#文本生成-1)
+- [生成参数说明](#生成参数说明)
 - [查看调用使用量](#查看调用使用量)
 - [模型介绍](#模型介绍)
 - [返回结果](#返回结果)
@@ -853,6 +854,30 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 </tr>
 </table>
+
+## 生成参数说明 
+
+1. max_length: 指定生成的文本的token总数量（包括输入的token数量） 
+
+2. min_lenght: 指定生成的文本的最小数量（不包括输入的token数量） 
+
+3. do_sample: 是否采样输出
+
+4. num_beams: 当使用beam search搜索时需要指定的beam的num，越大效果越好，但是越费时间
+
+5. temperature: 平滑输出token的概率
+
+6. top_k: 保留概率最大的前k个进行采样
+
+7. top_p: 按照概率排序的token，在保留概率累计和为当前值范围内的token进行采样
+
+8. repetition_penalty: 重复惩罚参数
+
+9. length_penalty: 长度惩罚参数
+
+10. no_repeat_ngram_size: 不重复的ngram窗口大小
+
+更多参数和说明[参考transformers](https://huggingface.co/docs/transformers/v4.25.1/en/main_classes/text_generation#transformers.GenerationMixin.generate)
 
 ## 查看调用使用量
 

@@ -156,6 +156,16 @@ response = cl.classify(
       labels = ["美颜", "二手", "外卖", "办公", "求职"])
 print('prediction: {}'.format(response.classifications))
 ```
+     # 获取单次输入的预测标签及其概率
+     cls_result=response.classifications[0]
+     predict_label=cls_result.prediction
+     confidence=cls_result.confidence
+     possibility=''
+     for ii,element in enumerate(confidence):
+         if element.label==predict_label:
+             possibility=element.confidence
+             break
+ 
 </td>
 <td>
 

@@ -116,7 +116,7 @@ python setup.py install
 import clueai
 
 # initialize the Clueai Client with an API Key
-cl = clueai.Client("JoDe5tXADNtoJPdJPaFZb1100010111", check_api_key=True)
+cl = clueai.Client('YOUR_API_KEY', check_api_key=True)
 prompt= '''用户：介绍一下亚马逊云的历史
 小元：'''
 
@@ -135,7 +135,7 @@ print('prediction: {}'.format(prediction.generations[0].text))
 import clueai
 
 # initialize the Clueai Client with an API Key
-cl = clueai.Client("JoDe5tXADNtoJPdJPaFZb1100010111", check_api_key=True)
+cl = clueai.Client('YOUR_API_KEY', check_api_key=True)
 prompt= '''用户：新冠什么症状？
 小元：新冠是指新型冠状病毒，其症状包括发热、干咳、乏力、嗅味觉减退、呼吸困难等。
 用户：可以吃什么药？

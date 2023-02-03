@@ -27,6 +27,7 @@
   - [安装](#安装)
 - [快速开始](#快速开始)
   - [免费试玩](#免费试玩)
+  - [ChatYuan功能对话](#ChatYuan功能对话)
   - [智能文档问答生成](#智能文档问答生成)
   - [文本理解](#文本理解)
   - [信息抽取(NER)](#信息抽取ner)
@@ -108,6 +109,49 @@ python setup.py install
 | 纠错 correct | - | 93.35  | 
 
 
+### ChatYuan功能对话
+
+##### 单轮对话：
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("JoDe5tXADNtoJPdJPaFZb1100010111", check_api_key=True)
+prompt= '''用户：介绍一下亚马逊云的历史
+小元：'''
+
+# generate a prediction for a prompt 
+# 需要返回得分的话，指定return_likelihoods="GENERATION"
+prediction = cl.generate(
+            model_name='ChatYuan-large',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
+
+##### 多轮对话：
+```python
+import clueai
+
+# initialize the Clueai Client with an API Key
+cl = clueai.Client("JoDe5tXADNtoJPdJPaFZb1100010111", check_api_key=True)
+prompt= '''用户：新冠什么症状？
+小元：新冠是指新型冠状病毒，其症状包括发热、干咳、乏力、嗅味觉减退、呼吸困难等。
+用户：可以吃什么药？
+小元：根据您提供的病史，目前没有明确的抗新冠病毒的药物，建议您在家进行自我隔离，避免与他人接触，多喝开水，清淡易消化饮食，避免熬夜和过度劳累，适当进行户外活动。
+用户：帮我写一个2023年工作规划
+小元：'''
+
+# generate a prediction for a prompt 
+# 需要返回得分的话，指定return_likelihoods="GENERATION"
+prediction = cl.generate(
+            model_name='ChatYuan-large',
+            prompt=prompt)
+            
+# print the predicted text          
+print('prediction: {}'.format(prediction.generations[0].text))
+```
 ### 智能文档问答生成
 
 说明：

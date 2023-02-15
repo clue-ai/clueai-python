@@ -364,7 +364,7 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 ```python
 # 上传少量微调数据，指定输入和输出字段， input_field和target_field分别指你需要微调的输入和输出字段
-# 指定基础模型ChatYuan/ClueAI
+# 指定基础模型ChatYuan/ClueAI, ChatYuan:功能对话大模型，ClueAI：单模型多任务大模型
 import clueai
 api_key=""
 cl = clueai.Client(api_key)
@@ -389,7 +389,7 @@ else:
 import clueai
 cl = clueai.Client(api_key)
 # engine_key 指定你训练模型的key
-# 指定基础模型ChatYuan/ClueAI
+# 指定基础模型ChatYuan/ClueAI, ChatYuan:功能对话大模型，ClueAI：单模型多任务大模型
 response = cl.start_finetune_model(
         engine_key=engine_key,
         base_model_name="ChatYuan")
@@ -422,7 +422,7 @@ generate_config = {
     "num_beams": 1
   }
 # 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
-# 指定基础模型ChatYuan/ClueAI
+# 指定基础模型ChatYuan/ClueAI, ChatYuan:功能对话大模型，ClueAI：单模型多任务大模型
 prediction = cl.finetune_generate(
         engine_key=engine_key,
         prompt=prompt,

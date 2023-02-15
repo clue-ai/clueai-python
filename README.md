@@ -27,7 +27,9 @@
   - [安装](#安装)
 - [快速开始](#快速开始)
   - [免费试玩](#免费试玩)
-  - [ChatYuan功能对话](#ChatYuan功能对话)
+  - [ChatYuan功能对话](#chatyuan功能对话)
+      - [单轮对话：](#单轮对话)
+      - [多轮对话：](#多轮对话)
   - [智能文档问答生成](#智能文档问答生成)
   - [文本理解](#文本理解)
   - [信息抽取(NER)](#信息抽取ner)
@@ -362,13 +364,15 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 
 ```python
 # 上传少量微调数据，指定输入和输出字段， input_field和target_field分别指你需要微调的输入和输出字段
+# 指定基础模型ChatYuan/ClueAI
 import clueai
 api_key=""
 cl = clueai.Client(api_key)
 response = cl.upload_finetune_corpus(
       file_path="finetune_train_examples.json",
       input_field="input",
-      target_field="target"
+      target_field="target",
+      base_model_name="ChatYuan"
       )
 
 if "engine_key" in response:
@@ -385,8 +389,10 @@ else:
 import clueai
 cl = clueai.Client(api_key)
 # engine_key 指定你训练模型的key
+# 指定基础模型ChatYuan/ClueAI
 response = cl.start_finetune_model(
-        engine_key=engine_key)
+        engine_key=engine_key,
+        base_model_name="ChatYuan")
 print(response)
 ```
 </td>
@@ -398,7 +404,9 @@ import clueai
 
 # initialize the Clueai Client with an API Key
 cl = clueai.Client(api_key)
-prompt= '''以下两句话的意思相同的吗？
+chatyuan_prompt= '''用户：你能干什么？
+小元：'''
+clueai_prompt= '''以下两句话的意思相同的吗？
 “花呗已经退还 可是我还没收到”，“我的花呗最迟还款是几号”。
 选项：是的，不是。
 答案：'''
@@ -413,9 +421,11 @@ generate_config = {
     "num_beams": 1
   }
 # 如果需要自由调整参数自由采样生成，添加额外参数信息设置方式：generate_config=generate_config
+# 指定基础模型ChatYuan/ClueAI
 prediction = cl.finetune_generate(
         engine_key=engine_key,
-        prompt=prompt)
+        prompt=prompt,
+        base_model_name="ChatYuan")
 # print the predicted text
 print('prediction: {}'.format(prediction.generations[0].text))
 ```

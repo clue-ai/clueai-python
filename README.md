@@ -351,7 +351,9 @@ curl --location --request POST 'https://www.modelfun.cn/modelfun/api/serving_api
 2. 上传的数据为json格式，PromptCLUE参考./examples/finetune_train_examples.json, ChatYuan参考./examples/qa_test.json
 3. 基于promptCLUE模型微调，建议参考prompt提示的格式构建数据集，效果会更好，prompt格式可以参考下面[示例输入](#示例输入)的形式
 4. 如果是基于ChatYuan微调的话，可以参考[示例格式](https://github.com/clue-ai/clueai-python/blob/main/examples/qa_test.json)，也可以参考[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=jctvm0fxMwEY)  
-   a. 输入为json格式，
+   a. 输入为json格式, 包含两个字段input和output（字段名字可以自己指定）   
+   b. input的内容可以是"用户：+内容+\n小元："的格式，也可以直接是"内容"的格式  
+   c. output的内容直接是你想模型输出的结果内容即可
 5. 需要有个API key， 并且在创建`clueai.Client`对象时需要指定这个API key. API key 可以通过这个[平台](https://www.clueai.cn/)获得，方法： 点击[官网](https://www.clueai.cn/)右上角立即使用-注册登陆后-右上角有创建apikey-创建apikey
 6. 微调数据数量限制1w条，超过会被采样，如果需要微调更大数量请与我们联系，联系方式见最下方
 7. 完整代码可参考：[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=zMSp1naSL8X9)

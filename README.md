@@ -28,8 +28,8 @@
 - [快速开始](#快速开始)
   - [免费试玩](#免费试玩)
   - [ChatYuan功能对话](#chatyuan功能对话)
-      - [单轮对话：](#单轮对话)
-      - [多轮对话：](#多轮对话)
+      - [单轮对话](#单轮对话)
+      - [多轮对话](#多轮对话)
   - [智能文档问答生成](#智能文档问答生成)
   - [文本理解](#文本理解)
   - [信息抽取(NER)](#信息抽取ner)
@@ -115,7 +115,7 @@ python setup.py install
 
 ### ChatYuan功能对话
 
-##### 单轮对话：
+##### 单轮对话
 ```python
 import clueai
 
@@ -134,7 +134,7 @@ prediction = cl.generate(
 print('prediction: {}'.format(prediction.generations[0].text))
 ```
 
-##### 多轮对话：
+##### 多轮对话
 ```python
 import clueai
 

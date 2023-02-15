@@ -135,7 +135,7 @@ class Client:
         input_field: str = "input",
         target_field: str = "output",
         headers: dict = {},
-        model_name: str = None,
+        base_model_name: str = None,
         sync: bool = True
         ):
         try:
@@ -151,7 +151,7 @@ class Client:
         tmp_headers = {
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Request-Source': 'python-sdk',
-            'Model-name': model_name
+            'Model-name': base_model_name
         }
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
@@ -163,12 +163,14 @@ class Client:
         tmp_headers.update(headers)
 
         is_sync = "sync/" if sync else ""
-        res = requests.post(f"{self.clueai_api_url}/finetune/upload/{is_sync}",
+        chatyuan = "chatyuan/" if base_model_name == "ChatYuan" else ""
+        res = requests.post(f"{self.clueai_api_url}/{chatyuan}finetune/upload/{is_sync}",
             files=files, data=data_json, headers=tmp_headers)
         return res.json()
 
     def start_finetune_model(self,
         engine_key: str,
+        base_model_name: str = None,
         headers: dict = {}):
         json_body = {
             'engine_key': engine_key,
@@ -192,14 +194,15 @@ class Client:
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
 
-        finished_train_res = requests.post(f"{self.clueai_api_url}/finetune/finished/", json=json_body, headers=tmp_headers)
+        chatyuan = "chatyuan/" if base_model_name == "ChatYuan" else ""
+        finished_train_res = requests.post(f"{self.clueai_api_url}/{chatyuan}finetune/finished/", json=json_body, headers=tmp_headers)
         finished_train_res = finished_train_res.json()
         if "finished" not in finished_train_res or finished_train_res["finished"] != True:
             return (f"还未完成训练，请稍后：{finished_train_res}")
         else:
             print("已经训练完成, 正在启动中, 预计需要等待20s...")
 
-        res = requests.post(f"{self.clueai_api_url}/finetune/start/", json=json_body, headers=tmp_headers, timeout=self.timeout)
+        res = requests.post(f"{self.clueai_api_url}/{chatyuan}finetune/start/", json=json_body, headers=tmp_headers, timeout=self.timeout)
         res_dict = res.json()
 
         return "启动成功" if res_dict["start"] else "启动失败"
@@ -208,7 +211,7 @@ class Client:
         self,
         engine_key: str,
         prompt: str,
-        model_name: str = None,
+        base_model_name: str = None,
         return_likelihoods: str = None,
         headers: dict = {},
         generate_config: dict = {}
@@ -227,7 +230,7 @@ class Client:
         json_body = {
             'engine_key': engine_key,
             'task_type': "generate",
-            'model_name': model_name,
+            'model_name': base_model_name,
             'input_data': [prompt],
             'return_likelihoods': return_likelihoods,
             'generate_config': generate_config
@@ -236,12 +239,14 @@ class Client:
             'Api-Key': 'BEARER {}'.format(self.api_key),
             'Content-Type': 'application/json',
             'Request-Source': 'python-sdk',
-            'Model-name': model_name
+            'Model-name': base_model_name
         }
         if self.modelfun_version != '':
             tmp_headers['clueai-Version'] = self.modelfun_version
         tmp_headers.update(headers)
-        response = requests.post(f"{self.clueai_api_url}/finetune/predict/", json=json_body, headers=tmp_headers, timeout=self.timeout)
+
+        chatyuan = "chatyuan/" if base_model_name == "ChatYuan" else ""
+        response = requests.post(f"{self.clueai_api_url}/{chatyuan}finetune/predict/", json=json_body, headers=tmp_headers, timeout=self.timeout)
         response = response.json()
         generations: List[Generation] = []
         if "result" not in response:

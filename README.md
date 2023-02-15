@@ -410,6 +410,7 @@ clueai_prompt= '''以下两句话的意思相同的吗？
 “花呗已经退还 可是我还没收到”，“我的花呗最迟还款是几号”。
 选项：是的，不是。
 答案：'''
+prompt = chatyuan_prompt
 # generate a prediction for a prompt
 
 generate_config = {

@@ -50,8 +50,9 @@
 - [模型介绍](#模型介绍)
 - [返回结果](#返回结果)
 - [问题反馈和技术交流](#问题反馈和技术交流)
-
-### 更新 Update 2023-02-15(新)
+### 更新 Update 2023-03-23(新)
+[ChatYuan开源模型](https://github.com/clue-ai/ChatYuan)升级
+### 更新 Update 2023-02-15
 新增模型ChatYuan微调功能：[模型微调](#模型微调) [上传库-启动-调用](#上传库-启动-调用)  
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1H5J03ek3kpKschQ32mhX-y0JyRo1mIXN#scrollTo=jctvm0fxMwEY)
 ### 更新 Update 2023-02-03

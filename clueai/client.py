@@ -411,6 +411,7 @@ class Client:
         generate_config: dict = {}
     ) -> Generations:
         if len(prompt) > 1024:
+            print(f"警告：你的prompt长度是{len(prompt)}， 超过了1024个字符, 会被截断")
             prompt = prompt[:1024]
         json_body = json.dumps({
             'task_type': "generate",

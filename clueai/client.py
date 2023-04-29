@@ -561,7 +561,7 @@ class Client:
             response = self.__pyfetch(url, tmp_headers, json_body)
             return response
         else:
-            response = requests.post(url, json=json.loads(json_body), headers=tmp_headers)
+            response = requests.post(url, json=json.loads(json_body), headers=tmp_headers, timeout=self.timeout)
             try:
                 res = json.loads(response.text)
             except Exception:
